@@ -1,0 +1,9 @@
+# RC Values Mapping for Ercot TransmissionType
+_modelTypeId.type000000136=DSC
+_modelTypeId.type000000137=CB
+_modelTypeId.type000000138=EBC
+
+# RC Values Mapping for Ercot Nature Of Work
+ERCOT_nature_of_work-T.Repair/Replace Damaged Equipment=RE
+ERCOT_nature_of_work-T.VoltageAdjust=VA
+

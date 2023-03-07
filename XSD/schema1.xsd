@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<xsd:schema xmlns:tns="http://www.ercot.com/schema/2007-06/nodal/ews" attributeFormDefault="unqualified"
+	elementFormDefault="qualified" targetNamespace="http://www.ercot.com/schema/2007-06/nodal/ews"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="OutageSet" xmlns:q1="http://www.ercot.com/schema/2007-06/nodal/ews">
+		<xsd:attribute name="xmlns" type="xsd:string" use="required" />
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Outage">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="OutageInfo">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="outageType" type="xsd:string" />
+										<xsd:element name="participant" type="xsd:string" />
+										<xsd:element name="Requestor">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="name" type="xsd:unsignedShort" />
+													<xsd:element name="userFullName" type="xsd:string" />
+													<xsd:element name="tertiaryContact" type="xsd:string" />
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="Disclaimer" type="xsd:string" />
+										<xsd:element name="disclaimerAck" type="xsd:boolean" />
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Group">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="name" type="xsd:string" />
+										<xsd:element maxOccurs="unbounded" name="GroupTransmissionOutage">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="operatingCompany" type="xsd:string" />
+													<xsd:element name="equipmentName" type="xsd:unsignedShort" />
+													<xsd:element name="equipmentIdentifier" type="xsd:string" />
+													<xsd:element name="transmissionType" type="xsd:string" />
+													<xsd:element name="fromStation" type="xsd:string" />
+													<xsd:element name="outageState" type="xsd:string" />
+													<xsd:element name="voltage" type="xsd:unsignedByte" />
+													<xsd:element name="projectName" type="xsd:string" />
+													<xsd:element name="emergencyRestorationTime" type="xsd:unsignedByte" />
+													<xsd:element name="natureOfWork" type="xsd:string" />
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Schedule">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="plannedStart" type="xsd:dateTime" />
+										<xsd:element name="plannedEnd" type="xsd:dateTime" />
+										<xsd:element name="earliestStart" type="xsd:dateTime" />
+										<xsd:element name="latestEnd" type="xsd:dateTime" />
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="OSNotes">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="RequestorNotes">
+										<xsd:complexType>
+											<xsd:sequence>
+											<xsd:element name="Note">
+												<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="createdTime" type="xsd:dateTime" />
+													<xsd:element name="createdBy" type="xsd:string" />
+													<xsd:element name="company" type="xsd:string" />
+													<xsd:element name="comment" type="xsd:string" />
+												</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,77 @@
+#Nature of Work codes for Transmission Outage
+ERCOT_nature_of_work-T.Associated Equipment Outage=AO
+ERCOT_nature_of_work-T.Breaker Maintenance=BM
+ERCOT_nature_of_work-T.Breaker Repair/Replace=BR
+ERCOT_nature_of_work-T.Line Maintenance=LM
+ERCOT_nature_of_work-T.Line Rebuild/Upgrade=LR
+ERCOT_nature_of_work-T.New Eqipment Energization=NE
+ERCOT_nature_of_work-T.Other=OT
+ERCOT_nature_of_work-T.Relay Work=RW
+ERCOT_nature_of_work-T.Repair Hot Spot=HS
+ERCOT_nature_of_work-T.Repair/Replace Damaged Equipment=DR
+ERCOT_nature_of_work-T.Replace Equipment=RE
+ERCOT_nature_of_work-T.Retirement of Old Equipment=OE
+ERCOT_nature_of_work-T.Switch Maintenance=SM 
+ERCOT_nature_of_work-T.Switch Repair/Replace=SR
+ERCOT_nature_of_work-T.Telcom Work=TC
+ERCOT_nature_of_work-T.Third Party Request=PR
+ERCOT_nature_of_work-T.Transformer Maintenance=TM
+ERCOT_nature_of_work-T.Transformer Repair/Replace=TR
+ERCOT_nature_of_work-T.Transformer Testing=TT
+ERCOT_nature_of_work-T.Unknown=UN
+
+#The valid state codes 
+A.Entered Not Yet Submitted=ENYS
+A.Received at ERCOT=Recvd
+A.Study=Study
+A.Rejected=Rejct
+A.Accepted=Accpt
+A.Approved=Apprv
+A.Active=Active
+A.Active Extension=AExt
+A.Potential Opportunity=PotOp
+A.Withdrawn=Withd
+A.Canceled=Cancl
+A.Pending Completion=PComp
+A.Expired Opportunity=ExpOp
+A.Completed - Editable=CompEd
+A.Completed - Not Editable=CompNE
+
+#The valid status codes 
+B.Entered Not Yet Submitted=ENYS
+B.Received at ERCOT=RatE
+B.Accepted=Accpt
+B.Approved=Apprv
+B.Rejected=Rejct
+B.Selected for Study=Study
+B.Withdrawn=Withd
+B.Expired Opportunity=ExpOp
+B.Canceled=Cancl
+
+#Valid outage type codes 
+ERCOT_outage_type-T.Planned=PL
+ERCOT_outage_type-T.Maintenance 1=M1
+ERCOT_outage_type-T.Maintenance 2=M2
+ERCOT_outage_type-T.Maintenance 3=M3
+ERCOT_outage_type-T.Forced=FR
+ERCOT_outage_type-T.Remedial Switching Action=RS
+ERCOT_outage_type-T.Simple=SM
+
+#Cancel Codes
+D.Cancel – ERROR=ERR
+D.Cancel – Expired=EXP
+D.Cancel – Reschedule within 1 month=RES1M
+D.Cancel – Coordinating with ERCOT=CWE
+D.Cancel – Emergency Operations=EOP
+D.Cancel – Labor/Crew Unavailable=LCU
+D.Cancel – Materials Unavailable=MUA
+D.Cancel – Reschedule date unknown=RDU
+D.Cancel – Reschedule within next season=RNS
+D.Cancel – Weather Conditions=WCD
+D.Cancel – Will not reschedule=WNR
+
+
+# RC Values Mapping for Ercot TransmissionType
+_modelTypeId.type000000136=DSC
+_modelTypeId.type000000137=CB
+_modelTypeId.type000000138=EBC

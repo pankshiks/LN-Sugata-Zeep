@@ -1,0 +1,148 @@
+{
+    "SOAP-ENV:Envelope": {
+        "@xmlns:SOAP-ENV": "http://schemas.xmlsoap.org/soap/envelope/",
+        "@xmlns:wsu": "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd",
+        "SOAP-ENV:Body": {
+            "@wsu:Id": "_eK8jWvcHJpgA1CFYhgGegBIK",
+            "ns0:ResponseMessage": {
+                "@xmlns:ns0": "http://www.ercot.com/schema/2007-06/nodal/ews/message",
+                "ns0:Header": {
+                    "ns0:Comment": null,
+                    "ns0:MessageID": "70233800709108719893582811942179242477",
+                    "ns0:Noun": "OutageSet",
+                    "ns0:ReplayDetection": {
+                        "ns0:Created": "2023-02-23T06:46:16.608-06:00",
+                        "ns0:Nonce": "896137d3f8f2dc06dd35c7272d90d3a4"
+                    },
+                    "ns0:Revision": "4",
+                    "ns0:Source": "ERCOT",
+                    "ns0:UserID": "API_OutplanOSITCC",
+                    "ns0:Verb": "reply"
+                },
+                "ns0:Payload": {
+                    "ns1:OutageSet": {
+                        "@xmlns:ns0": "http://www.ercot.com/schema/2007-05/nodal/eip/il",
+                        "@xmlns:ns1": "http://www.ercot.com/schema/2007-06/nodal/ews",
+                        "ns1:Outage": {
+                            "ns1:Group": {
+                                "ns1:GroupTransmissionOutage": [
+                                    {
+                                        "ns1:emergencyRestorationTime": "6",
+                                        "ns1:equipmentIdentifier": "_{28E961BD-19ED-4A26-9068-3C009EAB11E5}",
+                                        "ns1:equipmentName": "6014",
+                                        "ns1:fromStation": null,
+                                        "ns1:greater90Days": "true",
+                                        "ns1:highImpactOutage": "false",
+                                        "ns1:mRID": "TAEPTC.OTG.PL.Transmission.AEP00074758",
+                                        "ns1:natureOfWork": "RE",
+                                        "ns1:operatingCompany": "TAEPTC",
+                                        "ns1:outageState": "O",
+                                        "ns1:projectName": "Project2",
+                                        "ns1:toStation": null,
+                                        "ns1:transmissionType": "DSC",
+                                        "ns1:voltage": "138.0"
+                                    },
+                                    {
+                                        "ns1:emergencyRestorationTime": "6",
+                                        "ns1:equipmentIdentifier": "_{7EEF8BDC-BA64-4331-B4F9-A16816B72F9F}",
+                                        "ns1:equipmentName": "6035",
+                                        "ns1:fromStation": null,
+                                        "ns1:greater90Days": "true",
+                                        "ns1:highImpactOutage": "true",
+                                        "ns1:mRID": "TAEPTC.OTG.PL.Transmission.AEP00074759",
+                                        "ns1:natureOfWork": "RE",
+                                        "ns1:operatingCompany": "TAEPTC",
+                                        "ns1:outageState": "O",
+                                        "ns1:projectName": "Project2",
+                                        "ns1:toStation": null,
+                                        "ns1:transmissionType": "CB",
+                                        "ns1:voltage": "138.0"
+                                    }
+                                ],
+                                "ns1:groupId": "TAEPTC.OTG.101111",
+                                "ns1:name": "Grp2"
+                            },
+                            "ns1:OSNotes": {
+                                "ns1:RASPSNotes": null,
+                                "ns1:RequestorNotes": null,
+                                "ns1:ReviewerNotes": null,
+                                "ns1:SupportingNotes": null
+                            },
+                            "ns1:OutageInfo": {
+                                "ns1:Requestor": {
+                                    "ns1:name": "API_OutplanOSITCC",
+                                    "ns1:primaryContact": null,
+                                    "ns1:secondaryContact": null,
+                                    "ns1:tertiaryContact": "512-555-1234",
+                                    "ns1:userFullName": "Alex Smith"
+                                },
+                                "ns1:outageType": "PL",
+                                "ns1:participant": "TAEPTC",
+                                "ns1:previousState": "ENYS",
+                                "ns1:requestDate": "2023-02-23T06:46:00-06:00",
+                                "ns1:state": "ENYS",
+                                "ns1:status": "RatE",
+                                "ns1:versionId": "1"
+                            },
+                            "ns1:Schedule": {
+                                "ns1:earliestStart": "2023-06-10T12:13:00-05:00",
+                                "ns1:latestEnd": "2023-06-11T12:13:00-05:00",
+                                "ns1:plannedEnd": "2023-06-11T12:13:00-05:00",
+                                "ns1:plannedStart": "2023-06-10T12:13:00-05:00"
+                            }
+                        }
+                    }
+                },
+                "ns0:Reply": {
+                    "ns0:ReplyCode": "OK",
+                    "ns0:Timestamp": "2023-02-23T06:46:16.602-06:00"
+                }
+            }
+        },
+        "SOAP-ENV:Header": {
+            "wsse:Security": {
+                "@SOAP-ENV:mustUnderstand": "1",
+                "@xmlns:wsse": "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
+                "Signature": {
+                    "@xmlns": "http://www.w3.org/2000/09/xmldsig#",
+                    "KeyInfo": {
+                        "wsse:SecurityTokenReference": {
+                            "wsse:Reference": {
+                                "@URI": "#_d68jWvcHJpgA1CFYhgGegBIK",
+                                "@ValueType": "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"
+                            }
+                        }
+                    },
+                    "SignatureValue": "ZP4Nr4fCPdCN9W+V11fwODFSVuliiWZFNJv/Bat/fWhYT6jvAdzJL4u64Yt31ixDFEp9S1GAtKe97VZw1gebtF5eKpsSGjRhMgWpSPnWYJfkI3JpqwneNqjnmFg+Qvm6hh+m07dGG//iNJmCOD0CuGo/eyZ2Q+5LK/g1WU18Onj+cCUn2M9KqdvHuU5oa0Qw4xOSSlOt8hx57hHPX9OtCWUkc5X/HrHO7IH4XqryzsSbI0XFkrtN8xi1WWActVgcDZAWXbgkF9Wdd8c9D1I+yWZUyed1Sw4GmscWhK7RzQGx38d5ttrDo2GI1JjfCPbVSZo/5kSa6Qa73of2JwleWA==",
+                    "SignedInfo": {
+                        "CanonicalizationMethod": {
+                            "@Algorithm": "http://www.w3.org/2001/10/xml-exc-c14n#"
+                        },
+                        "Reference": {
+                            "@URI": "#_eK8jWvcHJpgA1CFYhgGegBIK",
+                            "DigestMethod": {
+                                "@Algorithm": "http://www.w3.org/2000/09/xmldsig#sha1"
+                            },
+                            "DigestValue": "UWCX+FWRjgnKhfu3Zjm1dnktlFs=",
+                            "Transforms": {
+                                "Transform": {
+                                    "@Algorithm": "http://www.w3.org/2001/10/xml-exc-c14n#"
+                                }
+                            }
+                        },
+                        "SignatureMethod": {
+                            "@Algorithm": "http://www.w3.org/2000/09/xmldsig#rsa-sha1"
+                        }
+                    }
+                },
+                "wsse:BinarySecurityToken": {
+                    "#text": "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",
+                    "@EncodingType": "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary",
+                    "@ValueType": "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3",
+                    "@wsu:Id": "_d68jWvcHJpgA1CFYhgGegBIK",
+                    "@xmlns:wsu": "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+                }
+            }
+        }
+    }
+}

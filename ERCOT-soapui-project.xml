@@ -1,0 +1,1385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="2267e2f2-6f3d-47da-8ca7-ec00e1d4c3d3" activeEnvironment="Default" name="ERCOT" resourceRoot="${projectDir}" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="83a5e217-fe36-43b8-918f-5e60f3f96284" wsaVersion="NONE" name="HttpEndPointBinding" type="wsdl" bindingName="{http://www.ercot.com/wsdl/2007-06/nodal/ewsConcrete}HttpEndPointBinding" soapVersion="1_1" anonymous="optional" definition="XSDs/Nodal.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/smajumde/Desktop/ERCOT/XSDs/Nodal.wsdl"><con:part><con:url>file:/C:/Users/smajumde/Desktop/ERCOT/XSDs/Nodal.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://www.ercot.com/wsdl/2007-06/nodal/ewsConcrete" xmlns:ns0="http://www.ercot.com/schema/2007-06/nodal/ews/message" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.ercot.com/wsdl/2007-06/nodal/ewsConcrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.ercot.com/schema/2007-06/nodal/ews/message" xml:lang="en" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:include schemaLocation="Message.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="EWSRequest">
+    <wsdl:part name="input" element="ns0:RequestMessage"/>
+  </wsdl:message>
+  <wsdl:message name="EWSResponse">
+    <wsdl:part name="output" element="ns0:ResponseMessage"/>
+  </wsdl:message>
+  <wsdl:message name="EWSFault">
+    <wsdl:part name="fault" element="ns0:FaultMessage"/>
+  </wsdl:message>
+  <wsdl:portType name="Operations">
+    <wsdl:operation name="MarketTransactions">
+      <wsdl:input message="tns:EWSRequest"/>
+      <wsdl:output message="tns:EWSResponse"/>
+      <wsdl:fault name="fault1" message="tns:EWSFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="Alerts">
+      <wsdl:input message="tns:EWSRequest"/>
+      <wsdl:output message="tns:EWSResponse"/>
+      <wsdl:fault name="fault1" message="tns:EWSFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="MarketInfo">
+      <wsdl:input message="tns:EWSRequest"/>
+      <wsdl:output message="tns:EWSResponse"/>
+      <wsdl:fault name="fault1" message="tns:EWSFault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HttpEndPointBinding" type="tns:Operations">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="MarketTransactions">
+      <soap:operation soapAction="/BusinessService/NodalService.serviceagent/HttpEndPoint/MarketTransactions" style="document"/>
+      <wsdl:input>
+        <soap:body parts="input" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="output" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault1">
+        <soap:fault name="fault1" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="MarketInfo">
+      <soap:operation soapAction="/BusinessService/NodalService.serviceagent/HttpEndPoint/MarketInfo" style="document"/>
+      <wsdl:input>
+        <soap:body parts="input" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="output" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault1">
+        <soap:fault name="fault1" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Alerts">
+      <soap:operation soapAction="/BusinessService/NodalService.serviceagent/HttpEndPoint/Alerts" style="document"/>
+      <wsdl:input>
+        <soap:body parts="input" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="output" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault1">
+        <soap:fault name="fault1" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NodalService">
+    <wsdl:port name="HttpEndPoint" binding="tns:HttpEndPointBinding">
+      <soap:address location="https://testmisapi.ercot.com/2007-08/Nodal/eEDS/EWS/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\Users\smajumde\Desktop\ERCOT\XSDs\Message.xsd</con:url><con:content><![CDATA[<!--Message.xsd-->
+<!---->
+<!--Release Date: September 2007-->
+<!---->
+<!---->
+<!--9/12/2007 Nemat Version 0.2.1 Corrected the namespace: Added the missing /message-->
+<!--10/3/2007 Scott Version 0.3   Changed from lax to skip-->
+<!--11/7/2007 Nemat Version 0.3.1  ReplyType ID maxOccurs="unbounded" qualification-->
+<!--6/10/2008 Nemat Version 0.3.2  Added SASM, RUC and SCED to MarketType enumerations-->
+<!--6/25/2008 Nemat  Version 0.3.3 Added HRUC and DRUC in place of RUC reflecting two different RUC types-->
+<!--6/29/2008 Nemat  Version 0.3.4  Removed ADJ from the enumeration of the MarketType-->
+<!---->
+<xsd:schema targetNamespace="http://www.ercot.com/schema/2007-06/nodal/ews/message" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.3.3" xmlns="http://www.ercot.com/schema/2007-06/nodal/ews/message" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsse="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+  <xsd:import namespace="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="WSS200401wssecurity-secext-10.xsd"/>
+  <xsd:import namespace="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" schemaLocation="WSS200401wssecurity-utility-10.xsd"/>
+  <xsd:complexType name="RequestType">
+    <xsd:sequence>
+      <xsd:element name="MarketType" minOccurs="0">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="DAM"/>
+            <xsd:enumeration value="RTM"/>
+            <xsd:enumeration value="SASM"/>
+            <xsd:enumeration value="HRUC"/>
+            <xsd:enumeration value="DRUC"/>
+            <xsd:enumeration value="SCED"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="OperatingDate" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="TradingDate" type="xsd:date" minOccurs="0"/>
+      <xsd:element name="StartTime" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="EndTime" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="Zone" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="ASType" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Option" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="SortBy" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="ID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReplyType">
+    <xsd:sequence>
+      <xsd:element name="ReplyCode" type="xsd:string"/>
+      <xsd:element name="Error" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Timestamp" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="ID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PayloadType">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element name="Document" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element name="Compressed" type="xsd:string" minOccurs="0"/>
+      </xsd:choice>
+      <xsd:element name="format" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReplayDetectionType">
+    <xsd:sequence>
+      <xsd:element name="Nonce" type="wsse:EncodedString"/>
+      <xsd:element name="Created" type="wsu:AttributedDateTime"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="HeaderType">
+    <xsd:sequence>
+      <xsd:element name="Verb" default="get">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="cancel"/>
+            <xsd:enumeration value="canceled"/>
+            <xsd:enumeration value="change"/>
+            <xsd:enumeration value="changed"/>
+            <xsd:enumeration value="create"/>
+            <xsd:enumeration value="created"/>
+            <xsd:enumeration value="close"/>
+            <xsd:enumeration value="closed"/>
+            <xsd:enumeration value="delete"/>
+            <xsd:enumeration value="deleted"/>
+            <xsd:enumeration value="get"/>
+            <xsd:enumeration value="reply"/>
+            <xsd:enumeration value="submit"/>
+            <xsd:enumeration value="update"/>
+            <xsd:enumeration value="updated"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="Noun" type="xsd:string"/>
+      <xsd:element name="ReplayDetection" type="ReplayDetectionType"/>
+      <xsd:element name="Revision" type="xsd:string" default="001"/>
+      <xsd:element name="Source" type="xsd:string"/>
+      <xsd:element name="UserID" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="MessageID" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Comment" type="xsd:string" minOccurs="0"/>
+      <xsd:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="Message">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Header" type="HeaderType"/>
+        <xsd:choice>
+          <xsd:element name="Request" type="RequestType" minOccurs="0"/>
+          <xsd:element name="Reply" type="ReplyType" minOccurs="0"/>
+        </xsd:choice>
+        <xsd:element name="Payload" type="PayloadType" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RequestMessage">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Header" type="HeaderType"/>
+        <xsd:element name="Request" type="RequestType" minOccurs="0"/>
+        <xsd:element name="Payload" type="PayloadType" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ResponseMessage">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Header" type="HeaderType"/>
+        <xsd:element name="Reply" type="ReplyType" minOccurs="0"/>
+        <xsd:element name="Payload" type="PayloadType" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FaultMessage">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Reply" type="ReplyType" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\Users\smajumde\Desktop\ERCOT\XSDs\WSS200401wssecurity-secext-10.xsd</con:url><con:content><![CDATA[<!--From http://www.oasis-open.org/committees/download.php/5076/oasis-200401-wss-wssecurity-secext-1.0.xsd.xsd-->
+<!--OASIS takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this document or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any effort to identify any such rights. Information on OASIS's procedures with respect to rights in OASIS specifications can be found at the OASIS website. Copies of claims of rights made available for publication and any assurances of licenses to be made available, or the result of an attempt made to obtain a general license or permission for the use of such proprietary rights by implementors or users of this specification, can be obtained from the OASIS Executive Director.
+OASIS invites any interested party to bring to its attention any copyrights, patents or patent applications, or other proprietary rights which may cover technology that may be required to implement this specification. Please address the information to the OASIS Executive Director.
+Copyright (c) OASIS Open 2002-2004. All Rights Reserved.
+This document and translations of it may be copied and furnished to others, and derivative works that comment on or otherwise explain it or assist in its implementation may be prepared, copied, published and distributed, in whole or in part, without restriction of any kind, provided that the above copyright notice and this paragraph are included on all such copies and derivative works. However, this document itself does not be modified in any way, such as by removing the copyright notice or references to OASIS, except as needed for the purpose of developing OASIS specifications, in which case the procedures for copyrights defined in the OASIS Intellectual Property Rights document must be followed, or as required to translate it into languages other than English.
+The limited permissions granted above are perpetual and will not be revoked by OASIS or its successors or assigns.
+This document and the information contained herein is provided on an 'AS IS' basis and OASIS DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.-->
+<xsd:schema targetNamespace="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" blockDefault="#all" version="0.2" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsse="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+  <xsd:import namespace="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" schemaLocation="WSS200401wssecurity-utility-10.xsd"/>
+  <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+  <xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
+  <xsd:complexType name="AttributedString">
+    <xsd:annotation>
+      <xsd:documentation>This type represents an element with arbitrary attributes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute ref="wsu:Id"/>
+        <xsd:anyAttribute namespace="##other" processContents="lax"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="PasswordString">
+    <xsd:annotation>
+      <xsd:documentation>This type is used for password elements per Section 4.1.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="wsse:AttributedString">
+        <xsd:attribute name="Type" type="xsd:anyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EncodedString">
+    <xsd:annotation>
+      <xsd:documentation>This type is used for elements containing stringified binary data.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="wsse:AttributedString">
+        <xsd:attribute name="EncodingType" type="xsd:anyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="UsernameTokenType">
+    <xsd:annotation>
+      <xsd:documentation>This type represents a username token per Section 4.1</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Username" type="wsse:AttributedString"/>
+      <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute ref="wsu:Id"/>
+    <xsd:anyAttribute namespace="##other" processContents="lax"/>
+  </xsd:complexType>
+  <xsd:complexType name="BinarySecurityTokenType">
+    <xsd:annotation>
+      <xsd:documentation>A security token that is encoded in binary</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="wsse:EncodedString">
+        <xsd:attribute name="ValueType" type="xsd:anyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="KeyIdentifierType">
+    <xsd:annotation>
+      <xsd:documentation>A security token key identifier</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="wsse:EncodedString">
+        <xsd:attribute name="ValueType" type="xsd:anyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="tUsage">
+    <xsd:annotation>
+      <xsd:documentation>Typedef to allow a list of usages (as URIs).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:list itemType="xsd:anyURI"/>
+  </xsd:simpleType>
+  <xsd:attribute name="Usage" type="tUsage">
+    <xsd:annotation>
+      <xsd:documentation>This global attribute is used to indicate the usage of a referenced or indicated token within the containing context</xsd:documentation>
+    </xsd:annotation>
+  </xsd:attribute>
+  <xsd:complexType name="ReferenceType">
+    <xsd:annotation>
+      <xsd:documentation>This type represents a reference to an external security token.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="URI" type="xsd:anyURI"/>
+    <xsd:attribute name="ValueType" type="xsd:anyURI"/>
+    <xsd:anyAttribute namespace="##other" processContents="lax"/>
+  </xsd:complexType>
+  <xsd:complexType name="EmbeddedType">
+    <xsd:annotation>
+      <xsd:documentation>This type represents a reference to an embedded security token.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:any processContents="lax"/>
+    </xsd:choice>
+    <xsd:attribute name="ValueType" type="xsd:anyURI"/>
+    <xsd:anyAttribute namespace="##other" processContents="lax"/>
+  </xsd:complexType>
+  <xsd:complexType name="SecurityTokenReferenceType">
+    <xsd:annotation>
+      <xsd:documentation>This type is used reference a security token.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:any processContents="lax"/>
+    </xsd:choice>
+    <xsd:attribute ref="wsu:Id"/>
+    <xsd:attribute ref="wsse:Usage"/>
+    <xsd:anyAttribute namespace="##other" processContents="lax"/>
+  </xsd:complexType>
+  <xsd:complexType name="SecurityHeaderType">
+    <xsd:annotation>
+      <xsd:documentation>This complexType defines header block to use for security-relevant data directed at a specific SOAP actor.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>The use of "any" is to allow extensibility and different forms of security data.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:any>
+    </xsd:sequence>
+    <xsd:anyAttribute namespace="##other" processContents="lax"/>
+  </xsd:complexType>
+  <xsd:complexType name="TransformationParametersType">
+    <xsd:annotation>
+      <xsd:documentation>This complexType defines a container for elements to be specified from any namespace as properties/parameters of a DSIG transformation.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>The use of "any" is to allow extensibility from any namespace.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:any>
+    </xsd:sequence>
+    <xsd:anyAttribute namespace="##other" processContents="lax"/>
+  </xsd:complexType>
+  <xsd:element name="UsernameToken" type="wsse:UsernameTokenType">
+    <xsd:annotation>
+      <xsd:documentation>This element defines the wsse:UsernameToken element per Section 4.1.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="BinarySecurityToken" type="wsse:BinarySecurityTokenType">
+    <xsd:annotation>
+      <xsd:documentation>This element defines the wsse:BinarySecurityToken element per Section 4.2.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Reference" type="wsse:ReferenceType">
+    <xsd:annotation>
+      <xsd:documentation>This element defines a security token reference</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Embedded" type="wsse:EmbeddedType">
+    <xsd:annotation>
+      <xsd:documentation>This element defines a security token embedded reference</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="KeyIdentifier" type="wsse:KeyIdentifierType">
+    <xsd:annotation>
+      <xsd:documentation>This element defines a key identifier reference</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SecurityTokenReference" type="wsse:SecurityTokenReferenceType">
+    <xsd:annotation>
+      <xsd:documentation>This element defines the wsse:SecurityTokenReference per Section 4.3.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Security" type="wsse:SecurityHeaderType">
+    <xsd:annotation>
+      <xsd:documentation>This element defines the wsse:Security SOAP header element per Section 4.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="TransformationParameters" type="wsse:TransformationParametersType">
+    <xsd:annotation>
+      <xsd:documentation>This element contains properties for transformations from any namespace, including DSIG.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Password" type="wsse:PasswordString"/>
+  <xsd:element name="Nonce" type="wsse:EncodedString"/>
+  <xsd:simpleType name="FaultcodeEnum">
+    <xsd:restriction base="xsd:QName">
+      <xsd:enumeration value="wsse:UnsupportedSecurityToken"/>
+      <xsd:enumeration value="wsse:UnsupportedAlgorithm"/>
+      <xsd:enumeration value="wsse:InvalidSecurity"/>
+      <xsd:enumeration value="wsse:InvalidSecurityToken"/>
+      <xsd:enumeration value="wsse:FailedAuthentication"/>
+      <xsd:enumeration value="wsse:FailedCheck"/>
+      <xsd:enumeration value="wsse:SecurityTokenUnavailable"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\Users\smajumde\Desktop\ERCOT\XSDs\WSS200401wssecurity-utility-10.xsd</con:url><con:content><![CDATA[<!--From http://www.oasis-open.org/committees/download.php/5075/oasis-200401-wss-wssecurity-utility-1.0.xsd.xsd-->
+<!--OASIS takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this document or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any effort to identify any such rights. Information on OASIS's procedures with respect to rights in OASIS specifications can be found at the OASIS website. Copies of claims of rights made available for publication and any assurances of licenses to be made available, or the result of an attempt made to obtain a general license or permission for the use of such proprietary rights by implementors or users of this specification, can be obtained from the OASIS Executive Director.
+OASIS invites any interested party to bring to its attention any copyrights, patents or patent applications, or other proprietary rights which may cover technology that may be required to implement this specification. Please address the information to the OASIS Executive Director.
+Copyright (c) OASIS Open 2002-2004. All Rights Reserved.
+This document and translations of it may be copied and furnished to others, and derivative works that comment on or otherwise explain it or assist in its implementation may be prepared, copied, published and distributed, in whole or in part, without restriction of any kind, provided that the above copyright notice and this paragraph are included on all such copies and derivative works. However, this document itself does not be modified in any way, such as by removing the copyright notice or references to OASIS, except as needed for the purpose of developing OASIS specifications, in which case the procedures for copyrights defined in the OASIS Intellectual Property Rights document must be followed, or as required to translate it into languages other than English.
+The limited permissions granted above are perpetual and will not be revoked by OASIS or its successors or assigns.
+This document and the information contained herein is provided on an 'AS IS' basis and OASIS DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.-->
+<xsd:schema targetNamespace="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+  <!--// Fault Codes ///////////////////////////////////////////-->
+  <xsd:simpleType name="tTimestampFault">
+    <xsd:annotation>
+      <xsd:documentation>This type defines the fault code value for Timestamp message expiration.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:QName">
+      <xsd:enumeration value="wsu:MessageExpired"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!--// Global attributes ////////////////////////////////////-->
+  <xsd:attribute name="Id" type="xsd:ID">
+    <xsd:annotation>
+      <xsd:documentation>This global attribute supports annotating arbitrary elements with an ID.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:attribute>
+  <xsd:attributeGroup name="commonAtts">
+    <xsd:annotation>
+      <xsd:documentation>Convenience attribute group used to simplify this schema.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute ref="wsu:Id" use="optional"/>
+    <xsd:anyAttribute namespace="##other" processContents="lax"/>
+  </xsd:attributeGroup>
+  <!--// Utility types ////////////////////////////////////////-->
+  <xsd:complexType name="AttributedDateTime">
+    <xsd:annotation>
+      <xsd:documentation>This type is for elements whose [children] is a psuedo-dateTime and can have arbitrary attributes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attributeGroup ref="wsu:commonAtts"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AttributedURI">
+    <xsd:annotation>
+      <xsd:documentation>This type is for elements whose [children] is an anyURI and can have arbitrary attributes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:anyURI">
+        <xsd:attributeGroup ref="wsu:commonAtts"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!--// Timestamp header components ///////////////////////////-->
+  <xsd:complexType name="TimestampType">
+    <xsd:annotation>
+      <xsd:documentation>This complex type ties together the timestamp related elements into a composite type.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element ref="wsu:Created" minOccurs="0"/>
+      <xsd:element ref="wsu:Expires" minOccurs="0"/>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:any namespace="##other" processContents="lax"/>
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attributeGroup ref="wsu:commonAtts"/>
+  </xsd:complexType>
+  <xsd:element name="Timestamp" type="wsu:TimestampType">
+    <xsd:annotation>
+      <xsd:documentation>This element allows Timestamps to be applied anywhere element wildcards are present,
+including as a SOAP header.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <!--global element decls to allow individual elements to appear anywhere-->
+  <xsd:element name="Expires" type="wsu:AttributedDateTime">
+    <xsd:annotation>
+      <xsd:documentation>This element allows an expiration time to be applied anywhere element wildcards are present.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Created" type="wsu:AttributedDateTime">
+    <xsd:annotation>
+      <xsd:documentation>This element allows a creation time to be applied anywhere element wildcards are present.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://www.w3.org/2001/xml.xsd</con:url><con:content><![CDATA[<?xml-stylesheet href="../2008/09/xsd.xsl" type="text/xsl"?>
+<xs:schema targetNamespace="http://www.w3.org/XML/1998/namespace" xml:lang="en" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/1999/xhtml">
+  <xs:annotation>
+    <xs:documentation>
+      <div>
+        <h1>About the XML namespace</h1>
+        <div class="bodytext">
+          <p>This schema document describes the XML namespace, in a form
+      suitable for import by other schema documents.</p>
+          <p>
+            See
+            <a href="http://www.w3.org/XML/1998/namespace.html">http://www.w3.org/XML/1998/namespace.html</a>
+            and
+            <a href="http://www.w3.org/TR/REC-xml">http://www.w3.org/TR/REC-xml</a>
+            for information 
+      about this namespace.
+          </p>
+          <p>Note that local names in this namespace are intended to be
+      defined only by the World Wide Web Consortium or its subgroups.
+      The names currently defined in this namespace are listed below.
+      They should not be used with conflicting semantics by any Working
+      Group, specification, or document instance.</p>
+          <p>
+            See further below in this document for more information about
+            <a href="#usage">how to refer to this schema document from your own
+      XSD schema documents</a>
+            and about
+            <a href="#nsversioning">the
+      namespace-versioning policy governing this schema document</a>
+            .
+          </p>
+        </div>
+      </div>
+    </xs:documentation>
+  </xs:annotation>
+  <xs:attribute name="lang">
+    <xs:annotation>
+      <xs:documentation>
+        <div>
+          <h3>lang (as an attribute name)</h3>
+          <p>denotes an attribute whose value
+       is a language code for the natural language of the content of
+       any element; its value is inherited.  This name is reserved
+       by virtue of its definition in the XML specification.</p>
+        </div>
+        <div>
+          <h4>Notes</h4>
+          <p>Attempting to install the relevant ISO 2- and 3-letter
+      codes as the enumerated possible values is probably never
+      going to be a realistic possibility.</p>
+          <p>
+            See BCP 47 at
+            <a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</a>
+            and the IANA language subtag registry at
+            <a href="http://www.iana.org/assignments/language-subtag-registry">http://www.iana.org/assignments/language-subtag-registry</a>
+            for further information.
+          </p>
+          <p>The union allows for the 'un-declaration' of xml:lang with
+      the empty string.</p>
+        </div>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleType>
+      <xs:union memberTypes="xs:language">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value=""/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:union>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="space">
+    <xs:annotation>
+      <xs:documentation>
+        <div>
+          <h3>space (as an attribute name)</h3>
+          <p>denotes an attribute whose
+       value is a keyword indicating what whitespace processing
+       discipline is intended for the content of the element; its
+       value is inherited.  This name is reserved by virtue of its
+       definition in the XML specification.</p>
+        </div>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleType>
+      <xs:restriction base="xs:NCName">
+        <xs:enumeration value="default"/>
+        <xs:enumeration value="preserve"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="base" type="xs:anyURI">
+    <xs:annotation>
+      <xs:documentation>
+        <div>
+          <h3>base (as an attribute name)</h3>
+          <p>denotes an attribute whose value
+       provides a URI to be used as the base for interpreting any
+       relative URIs in the scope of the element on which it
+       appears; its value is inherited.  This name is reserved
+       by virtue of its definition in the XML Base specification.</p>
+          <p>
+            See
+            <a href="http://www.w3.org/TR/xmlbase/">http://www.w3.org/TR/xmlbase/</a>
+            for information about this attribute.
+          </p>
+        </div>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="id" type="xs:ID">
+    <xs:annotation>
+      <xs:documentation>
+        <div>
+          <h3>id (as an attribute name)</h3>
+          <p>denotes an attribute whose value
+       should be interpreted as if declared to be of type ID.
+       This name is reserved by virtue of its definition in the
+       xml:id specification.</p>
+          <p>
+            See
+            <a href="http://www.w3.org/TR/xml-id/">http://www.w3.org/TR/xml-id/</a>
+            for information about this attribute.
+          </p>
+        </div>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attributeGroup name="specialAttrs">
+    <xs:attribute ref="xml:base"/>
+    <xs:attribute ref="xml:lang"/>
+    <xs:attribute ref="xml:space"/>
+    <xs:attribute ref="xml:id"/>
+  </xs:attributeGroup>
+  <xs:annotation>
+    <xs:documentation>
+      <div>
+        <h3>Father (in any context at all)</h3>
+        <div class="bodytext">
+          <p>denotes Jon Bosak, the chair of 
+      the original XML Working Group.  This name is reserved by 
+      the following decision of the W3C XML Plenary and 
+      XML Coordination groups:</p>
+          <blockquote>
+            <p>In appreciation for his vision, leadership and
+	dedication the W3C XML Plenary on this 10th day of
+	February, 2000, reserves for Jon Bosak in perpetuity
+	the XML name "xml:Father".</p>
+          </blockquote>
+        </div>
+      </div>
+    </xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:documentation>
+      <div xml:id="usage" id="usage">
+        <h2>
+          <a name="usage">About this schema document</a>
+        </h2>
+        <div class="bodytext">
+          <p>
+            This schema defines attributes and an attribute group suitable
+      for use by schemas wishing to allow
+            <code>xml:base</code>
+            ,
+            <code>xml:lang</code>
+            ,
+            <code>xml:space</code>
+            or
+            <code>xml:id</code>
+            attributes on elements they define.
+          </p>
+          <p>To enable this, such a schema must import this schema for
+      the XML namespace, e.g. as follows:</p>
+          <pre>&lt;schema . . .>
+           . . .
+           &lt;import namespace="http://www.w3.org/XML/1998/namespace"
+                      schemaLocation="http://www.w3.org/2001/xml.xsd"/></pre>
+          <p>or</p>
+          <pre>&lt;import namespace="http://www.w3.org/XML/1998/namespace"
+                      schemaLocation="http://www.w3.org/2009/01/xml.xsd"/></pre>
+          <p>Subsequently, qualified reference to any of the attributes or the
+      group defined below will have the desired effect, e.g.</p>
+          <pre>&lt;type . . .>
+           . . .
+           &lt;attributeGroup ref="xml:specialAttrs"/></pre>
+          <p>will define a type which will schema-validate an instance element
+      with any of those attributes.</p>
+        </div>
+      </div>
+    </xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:documentation>
+      <div id="nsversioning" xml:id="nsversioning">
+        <h2>
+          <a name="nsversioning">Versioning policy for this schema document</a>
+        </h2>
+        <div class="bodytext">
+          <p>
+            In keeping with the XML Schema WG's standard versioning
+      policy, this schema document will persist at
+            <a href="http://www.w3.org/2009/01/xml.xsd">http://www.w3.org/2009/01/xml.xsd</a>
+            .
+          </p>
+          <p>
+            At the date of issue it can also be found at
+            <a href="http://www.w3.org/2001/xml.xsd">http://www.w3.org/2001/xml.xsd</a>
+            .
+          </p>
+          <p>
+            The schema document at that URI may however change in the future,
+      in order to remain compatible with the latest version of XML
+      Schema itself, or with the XML namespace itself.  In other words,
+      if the XML Schema or XML namespaces change, the version of this
+      document at
+            <a href="http://www.w3.org/2001/xml.xsd">http://www.w3.org/2001/xml.xsd</a>
+            will change accordingly; the version at
+            <a href="http://www.w3.org/2009/01/xml.xsd">http://www.w3.org/2009/01/xml.xsd</a>
+            will not change.
+          </p>
+          <p>Previous dated (and unchanging) versions of this schema 
+      document are at:</p>
+          <ul>
+            <li>
+              <a href="http://www.w3.org/2009/01/xml.xsd">http://www.w3.org/2009/01/xml.xsd</a>
+            </li>
+            <li>
+              <a href="http://www.w3.org/2007/08/xml.xsd">http://www.w3.org/2007/08/xml.xsd</a>
+            </li>
+            <li>
+              <a href="http://www.w3.org/2004/10/xml.xsd">http://www.w3.org/2004/10/xml.xsd</a>
+            </li>
+            <li>
+              <a href="http://www.w3.org/2001/03/xml.xsd">http://www.w3.org/2001/03/xml.xsd</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </xs:documentation>
+  </xs:annotation>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\Users\smajumde\Desktop\ERCOT\XSDs\xmldsig-core-schema.xsd</con:url><con:content><![CDATA[<!DOCTYPE schema PUBLIC "-//W3C//DTD XMLSchema 200102//EN" "http://www.w3.org/2001/XMLSchema.dtd">
+<!--Schema for XML Signatures
+    http://www.w3.org/2000/09/xmldsig#
+    $Revision: 1.2 $ on $Date: 2010/02/15 16:02:02 $ by $Author: maduru $
+
+    Copyright 2001 The Internet Society and W3C (Massachusetts Institute
+    of Technology, Institut National de Recherche en Informatique et en
+    Automatique, Keio University). All Rights Reserved.
+    http://www.w3.org/Consortium/Legal/
+
+    This document is governed by the W3C Software License [1] as described
+    in the FAQ [2].
+
+    [1] http://www.w3.org/Consortium/Legal/copyright-software-19980720
+    [2] http://www.w3.org/Consortium/Legal/IPR-FAQ-20000620.html#DTD-->
+<schema targetNamespace="http://www.w3.org/2000/09/xmldsig#" version="0.1" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+  <!--Basic Types Defined for Signatures-->
+  <simpleType name="CryptoBinary">
+    <restriction base="base64Binary"></restriction>
+  </simpleType>
+  <!--Start Signature-->
+  <element name="Signature" type="ds:SignatureType"/>
+  <complexType name="SignatureType">
+    <sequence>
+      <element ref="ds:SignedInfo"/>
+      <element ref="ds:SignatureValue"/>
+      <element ref="ds:KeyInfo" minOccurs="0"/>
+      <element ref="ds:Object" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="Id" type="ID" use="optional"/>
+  </complexType>
+  <element name="SignatureValue" type="ds:SignatureValueType"/>
+  <complexType name="SignatureValueType">
+    <simpleContent>
+      <extension base="base64Binary">
+        <attribute name="Id" type="ID" use="optional"/>
+      </extension>
+    </simpleContent>
+  </complexType>
+  <!--Start SignedInfo-->
+  <element name="SignedInfo" type="ds:SignedInfoType"/>
+  <complexType name="SignedInfoType">
+    <sequence>
+      <element ref="ds:CanonicalizationMethod"/>
+      <element ref="ds:SignatureMethod"/>
+      <element ref="ds:Reference" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="Id" type="ID" use="optional"/>
+  </complexType>
+  <element name="CanonicalizationMethod" type="ds:CanonicalizationMethodType"/>
+  <complexType name="CanonicalizationMethodType" mixed="true">
+    <sequence>
+      <any namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+      <!--(0,unbounded) elements from (1,1) namespace-->
+    </sequence>
+    <attribute name="Algorithm" type="anyURI" use="required"/>
+  </complexType>
+  <element name="SignatureMethod" type="ds:SignatureMethodType"/>
+  <complexType name="SignatureMethodType" mixed="true">
+    <sequence>
+      <element name="HMACOutputLength" minOccurs="0" type="ds:HMACOutputLengthType"/>
+      <any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+      <!--(0,unbounded) elements from (1,1) external namespace-->
+    </sequence>
+    <attribute name="Algorithm" type="anyURI" use="required"/>
+  </complexType>
+  <!--Start Reference-->
+  <element name="Reference" type="ds:ReferenceType"/>
+  <complexType name="ReferenceType">
+    <sequence>
+      <element ref="ds:Transforms" minOccurs="0"/>
+      <element ref="ds:DigestMethod"/>
+      <element ref="ds:DigestValue"/>
+    </sequence>
+    <attribute name="Id" type="ID" use="optional"/>
+    <attribute name="URI" type="anyURI" use="optional"/>
+    <attribute name="Type" type="anyURI" use="optional"/>
+  </complexType>
+  <element name="Transforms" type="ds:TransformsType"/>
+  <complexType name="TransformsType">
+    <sequence>
+      <element ref="ds:Transform" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="Transform" type="ds:TransformType"/>
+  <complexType name="TransformType" mixed="true">
+    <choice minOccurs="0" maxOccurs="unbounded">
+      <any namespace="##other" processContents="lax"/>
+      <!--(1,1) elements from (0,unbounded) namespaces-->
+      <element name="XPath" type="string"/>
+    </choice>
+    <attribute name="Algorithm" type="anyURI" use="required"/>
+  </complexType>
+  <!--End Reference-->
+  <element name="DigestMethod" type="ds:DigestMethodType"/>
+  <complexType name="DigestMethodType" mixed="true">
+    <sequence>
+      <any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="Algorithm" type="anyURI" use="required"/>
+  </complexType>
+  <element name="DigestValue" type="ds:DigestValueType"/>
+  <simpleType name="DigestValueType">
+    <restriction base="base64Binary"/>
+  </simpleType>
+  <!--End SignedInfo-->
+  <!--Start KeyInfo-->
+  <element name="KeyInfo" type="ds:KeyInfoType"/>
+  <complexType name="KeyInfoType" mixed="true">
+    <choice maxOccurs="unbounded">
+      <element ref="ds:KeyName"/>
+      <element ref="ds:KeyValue"/>
+      <element ref="ds:RetrievalMethod"/>
+      <element ref="ds:X509Data"/>
+      <element ref="ds:PGPData"/>
+      <element ref="ds:SPKIData"/>
+      <element ref="ds:MgmtData"/>
+      <any processContents="lax" namespace="##other"/>
+      <!--(1,1) elements from (0,unbounded) namespaces-->
+    </choice>
+    <attribute name="Id" type="ID" use="optional"/>
+  </complexType>
+  <element name="KeyName" type="string"/>
+  <element name="MgmtData" type="string"/>
+  <element name="KeyValue" type="ds:KeyValueType"/>
+  <complexType name="KeyValueType" mixed="true">
+    <choice>
+      <element ref="ds:DSAKeyValue"/>
+      <element ref="ds:RSAKeyValue"/>
+      <any namespace="##other" processContents="lax"/>
+    </choice>
+  </complexType>
+  <element name="RetrievalMethod" type="ds:RetrievalMethodType"/>
+  <complexType name="RetrievalMethodType">
+    <sequence>
+      <element ref="ds:Transforms" minOccurs="0"/>
+    </sequence>
+    <attribute name="URI" type="anyURI"/>
+    <attribute name="Type" type="anyURI" use="optional"/>
+  </complexType>
+  <!--Start X509Data-->
+  <element name="X509Data" type="ds:X509DataType"/>
+  <complexType name="X509DataType">
+    <sequence maxOccurs="unbounded">
+      <choice>
+        <element name="X509IssuerSerial" type="ds:X509IssuerSerialType"/>
+        <element name="X509SKI" type="base64Binary"/>
+        <element name="X509SubjectName" type="string"/>
+        <element name="X509Certificate" type="base64Binary"/>
+        <element name="X509CRL" type="base64Binary"/>
+        <any namespace="##other" processContents="lax"/>
+      </choice>
+    </sequence>
+  </complexType>
+  <complexType name="X509IssuerSerialType">
+    <sequence>
+      <element name="X509IssuerName" type="string"/>
+      <element name="X509SerialNumber" type="integer"/>
+    </sequence>
+  </complexType>
+  <!--End X509Data-->
+  <!--Begin PGPData-->
+  <element name="PGPData" type="ds:PGPDataType"/>
+  <complexType name="PGPDataType">
+    <choice>
+      <sequence>
+        <element name="PGPKeyID" type="base64Binary"/>
+        <element name="PGPKeyPacket" type="base64Binary" minOccurs="0"/>
+        <any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+      </sequence>
+      <sequence>
+        <element name="PGPKeyPacket" type="base64Binary"/>
+        <any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+      </sequence>
+    </choice>
+  </complexType>
+  <!--End PGPData-->
+  <!--Begin SPKIData-->
+  <element name="SPKIData" type="ds:SPKIDataType"/>
+  <complexType name="SPKIDataType">
+    <sequence maxOccurs="unbounded">
+      <element name="SPKISexp" type="base64Binary"/>
+      <any namespace="##other" processContents="lax" minOccurs="0"/>
+    </sequence>
+  </complexType>
+  <!--End SPKIData-->
+  <!--End KeyInfo-->
+  <!--Start Object (Manifest, SignatureProperty)-->
+  <element name="Object" type="ds:ObjectType"/>
+  <complexType name="ObjectType" mixed="true">
+    <sequence minOccurs="0" maxOccurs="unbounded">
+      <any namespace="##any" processContents="lax"/>
+    </sequence>
+    <attribute name="Id" type="ID" use="optional"/>
+    <attribute name="MimeType" type="string" use="optional"/>
+    <!--add a grep facet-->
+    <attribute name="Encoding" type="anyURI" use="optional"/>
+  </complexType>
+  <element name="Manifest" type="ds:ManifestType"/>
+  <complexType name="ManifestType">
+    <sequence>
+      <element ref="ds:Reference" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="Id" type="ID" use="optional"/>
+  </complexType>
+  <element name="SignatureProperties" type="ds:SignaturePropertiesType"/>
+  <complexType name="SignaturePropertiesType">
+    <sequence>
+      <element ref="ds:SignatureProperty" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="Id" type="ID" use="optional"/>
+  </complexType>
+  <element name="SignatureProperty" type="ds:SignaturePropertyType"/>
+  <complexType name="SignaturePropertyType" mixed="true">
+    <choice maxOccurs="unbounded">
+      <any namespace="##other" processContents="lax"/>
+      <!--(1,1) elements from (1,unbounded) namespaces-->
+    </choice>
+    <attribute name="Target" type="anyURI" use="required"/>
+    <attribute name="Id" type="ID" use="optional"/>
+  </complexType>
+  <!--End Object (Manifest, SignatureProperty)-->
+  <!--Start Algorithm Parameters-->
+  <simpleType name="HMACOutputLengthType">
+    <restriction base="integer"/>
+  </simpleType>
+  <!--Start KeyValue Element-types-->
+  <element name="DSAKeyValue" type="ds:DSAKeyValueType"/>
+  <complexType name="DSAKeyValueType">
+    <sequence>
+      <sequence minOccurs="0">
+        <element name="P" type="ds:CryptoBinary"/>
+        <element name="Q" type="ds:CryptoBinary"/>
+      </sequence>
+      <element name="G" type="ds:CryptoBinary" minOccurs="0"/>
+      <element name="Y" type="ds:CryptoBinary"/>
+      <element name="J" type="ds:CryptoBinary" minOccurs="0"/>
+      <sequence minOccurs="0">
+        <element name="Seed" type="ds:CryptoBinary"/>
+        <element name="PgenCounter" type="ds:CryptoBinary"/>
+      </sequence>
+    </sequence>
+  </complexType>
+  <element name="RSAKeyValue" type="ds:RSAKeyValueType"/>
+  <complexType name="RSAKeyValueType">
+    <sequence>
+      <element name="Modulus" type="ds:CryptoBinary"/>
+      <element name="Exponent" type="ds:CryptoBinary"/>
+    </sequence>
+  </complexType>
+  <!--End KeyValue Element-types-->
+  <!--End Signature-->
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://dummyhost:0000/</con:endpoint><con:endpoint>https://testmisapi.ercot.com/2007-08/Nodal/eEDS/EWS/</con:endpoint></con:endpoints><con:operation id="85834b2f-838f-4555-b80d-9d159604a156" isOneWay="false" action="/BusinessService/NodalService.serviceagent/HttpEndPoint/Alerts" name="Alerts" bindingOperationName="Alerts" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4018baa6-8aff-44d9-b6ef-476359e5cdde" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://testmisapi.ercot.com/2007-08/Nodal/eEDS/EWS/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mes="http://www.ercot.com/schema/2007-06/nodal/ews/message" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mes:RequestMessage>\r
+         <mes:Header>\r
+            <mes:Verb>get</mes:Verb>\r
+            <mes:Noun>?</mes:Noun>\r
+            <mes:ReplayDetection>\r
+               <mes:Nonce wsu:Id="?" EncodingType="?">?</mes:Nonce>\r
+               <mes:Created wsu:Id="?">?</mes:Created>\r
+            </mes:ReplayDetection>\r
+            <mes:Revision>001</mes:Revision>\r
+            <mes:Source>?</mes:Source>\r
+            <!--Optional:-->\r
+            <mes:UserID>?</mes:UserID>\r
+            <!--Optional:-->\r
+            <mes:MessageID>?</mes:MessageID>\r
+            <!--Optional:-->\r
+            <mes:Comment>?</mes:Comment>\r
+            <!--You may enter ANY elements at this point-->\r
+         </mes:Header>\r
+         <!--Optional:-->\r
+         <mes:Request>\r
+            <!--Optional:-->\r
+            <mes:MarketType>?</mes:MarketType>\r
+            <!--Optional:-->\r
+            <mes:OperatingDate>?</mes:OperatingDate>\r
+            <!--Optional:-->\r
+            <mes:TradingDate>?</mes:TradingDate>\r
+            <!--Optional:-->\r
+            <mes:StartTime>?</mes:StartTime>\r
+            <!--Optional:-->\r
+            <mes:EndTime>?</mes:EndTime>\r
+            <!--Optional:-->\r
+            <mes:Zone>?</mes:Zone>\r
+            <!--Optional:-->\r
+            <mes:ASType>?</mes:ASType>\r
+            <!--Optional:-->\r
+            <mes:Option>?</mes:Option>\r
+            <!--Optional:-->\r
+            <mes:SortBy>?</mes:SortBy>\r
+            <!--Zero or more repetitions:-->\r
+            <mes:ID>?</mes:ID>\r
+            <!--You may enter ANY elements at this point-->\r
+         </mes:Request>\r
+         <!--Optional:-->\r
+         <mes:Payload>\r
+            <!--You have a CHOICE of the next 3 items at this level-->\r
+            <!--You may enter ANY elements at this point-->\r
+            <!--Zero or more repetitions:-->\r
+            <mes:Document>?</mes:Document>\r
+            <!--Optional:-->\r
+            <mes:Compressed>?</mes:Compressed>\r
+            <!--Optional:-->\r
+            <mes:format>?</mes:format>\r
+         </mes:Payload>\r
+      </mes:RequestMessage>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig mustUnderstand="NONE" version="200508" action="/BusinessService/NodalService.serviceagent/HttpEndPoint/Alerts"/></con:call><con:call id="35aec98e-9f6d-4d60-b030-f71289b3aebc" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://dummyhost:0000/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mes="http://www.ercot.com/schema/2007-06/nodal/ews/message" xmlns:oas="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mes:RequestMessage>\r
+         <mes:Header>\r
+            <mes:Verb>get</mes:Verb>\r
+            <mes:Noun>?</mes:Noun>\r
+            <mes:ReplayDetection>\r
+               <mes:Nonce oas:Id="?" EncodingType="?">?</mes:Nonce>\r
+               <mes:Created oas:Id="?">?</mes:Created>\r
+            </mes:ReplayDetection>\r
+            <mes:Revision>001</mes:Revision>\r
+            <mes:Source>?</mes:Source>\r
+            <!--Optional:-->\r
+            <mes:UserID>?</mes:UserID>\r
+            <!--Optional:-->\r
+            <mes:MessageID>?</mes:MessageID>\r
+            <!--Optional:-->\r
+            <mes:Comment>?</mes:Comment>\r
+            <!--You may enter ANY elements at this point-->\r
+         </mes:Header>\r
+         <!--Optional:-->\r
+         <mes:Request>\r
+            <!--Optional:-->\r
+            <mes:MarketType>?</mes:MarketType>\r
+            <!--Optional:-->\r
+            <mes:OperatingDate>?</mes:OperatingDate>\r
+            <!--Optional:-->\r
+            <mes:TradingDate>?</mes:TradingDate>\r
+            <!--Optional:-->\r
+            <mes:StartTime>?</mes:StartTime>\r
+            <!--Optional:-->\r
+            <mes:EndTime>?</mes:EndTime>\r
+            <!--Optional:-->\r
+            <mes:Zone>?</mes:Zone>\r
+            <!--Optional:-->\r
+            <mes:ASType>?</mes:ASType>\r
+            <!--Optional:-->\r
+            <mes:Option>?</mes:Option>\r
+            <!--Optional:-->\r
+            <mes:SortBy>?</mes:SortBy>\r
+            <!--Zero or more repetitions:-->\r
+            <mes:ID>?</mes:ID>\r
+            <!--You may enter ANY elements at this point-->\r
+         </mes:Request>\r
+         <!--Optional:-->\r
+         <mes:Payload>\r
+            <!--You have a CHOICE of the next 3 items at this level-->\r
+            <!--You may enter ANY elements at this point-->\r
+            <!--Zero or more repetitions:-->\r
+            <mes:Document>?</mes:Document>\r
+            <!--Optional:-->\r
+            <mes:Compressed>?</mes:Compressed>\r
+            <!--Optional:-->\r
+            <mes:format>?</mes:format>\r
+         </mes:Payload>\r
+      </mes:RequestMessage>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="/BusinessService/NodalService.serviceagent/HttpEndPoint/Alerts"/></con:call></con:operation><con:operation id="8bb40415-7597-4027-b35b-44e41c3af5fe" isOneWay="false" action="/BusinessService/NodalService.serviceagent/HttpEndPoint/MarketInfo" name="MarketInfo" bindingOperationName="MarketInfo" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="417cb246-f72d-482b-bf59-b62accb3cfdc" name="GetSysStatus" outgoingWss="ERCOT_Cert" sslKeystore="API Outplan OSI TCC MOTE.pfx"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://testmisapi.ercot.com/2007-08/Nodal/eEDS/EWS/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <RequestMessage xmlns="http://www.ercot.com/schema/2007-06/nodal/ews/message">
+         <Header>
+            <Verb>get</Verb>
+            <Noun>SystemStatus</Noun>
+            <ReplayDetection>
+               <Nonce>7999</Nonce>
+               <Created>2023-01-05T02:23:49.349-07:00</Created>
+            </ReplayDetection>
+            <Revision>004</Revision>
+            <Source>API Outplan OSI TCC</Source>
+            <!--Optional:-->
+            <UserID>API_OutplanOSITCC</UserID>
+            
+         </Header>
+ 
+      </RequestMessage>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username/><con:password/><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="/BusinessService/NodalService.serviceagent/HttpEndPoint/MarketInfo"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="941c7afa-6cbd-4fe8-9bc0-f929c8a52301" isOneWay="false" action="/BusinessService/NodalService.serviceagent/HttpEndPoint/MarketTransactions" name="MarketTransactions" bindingOperationName="MarketTransactions" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6ca9f203-2eae-4820-8c0b-11000d90c9a7" name="SubmitOutage" outgoingWss="ERCOT_Cert" sslKeystore="API Outplan OSI TCC MOTE.pfx"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://testmisapi.ercot.com/2007-08/Nodal/eEDS/EWS/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <RequestMessage xmlns="http://www.ercot.com/schema/2007-06/nodal/ews/message">\r
+         <Header>\r
+            <Verb>create</Verb>\r
+            <Noun>OutageSet</Noun>\r
+            <ReplayDetection>\r
+               <Nonce>99912465</Nonce>\r
+               <Created>2023-01-12T08:49:00-07:00</Created>\r
+            </ReplayDetection>\r
+            <Revision>004</Revision>\r
+            <Source>TAEPTC</Source>\r
+            <!--Optional:-->\r
+            <UserID>API_OutplanOSITCC</UserID>\r
+         </Header>\r
+         <Payload>\r
+            <ns2:OutageSet xmlns="http://www.ercot.com/schema/2007-06/nodal/ews" xmlns:ns2="http://www.ercot.com/schema/2007-06/nodal/ews">\r
+               <ns2:Outage>\r
+                  <ns2:OutageInfo>\r
+                     <ns2:outageType>PL</ns2:outageType>\r
+                     <ns2:participant></ns2:participant>\r
+                     <ns2:lastModified>2022-11-21T14:09:00-05:00</ns2:lastModified>\r
+                     <ns2:lastModifiedBy>USER1</ns2:lastModifiedBy>\r
+                     <ns2:Requestor>\r
+                        <ns2:name>API_OutplanOSITCC</ns2:name>\r
+                        <ns2:userFullName>API OutplanOSITCC</ns2:userFullName>\r
+                        <ns2:primaryContact>512-481-4545</ns2:primaryContact>\r
+                        <ns2:secondaryContact>361-944-8167</ns2:secondaryContact>\r
+                        <ns2:tertiaryContact>512-867-5309</ns2:tertiaryContact>\r
+                     </ns2:Requestor>\r
+                     <ns2:requestDate>2022-12-26T14:09:00-05:00</ns2:requestDate>\r
+                     <ns2:Disclaimer>temp disclaimer</ns2:Disclaimer>\r
+                     <ns2:disclaimerAck>true</ns2:disclaimerAck>\r
+                  </ns2:OutageInfo>\r
+                  <ns2:TransmissionOutage>\r
+                     <ns2:operatingCompany>TAEPTC</ns2:operatingCompany>\r
+                     <ns2:equipmentName>KOCH_H_LON_HI11</ns2:equipmentName>\r
+                     <ns2:equipmentIdentifier>_{28B866DE-4E37-436A-8611-E944B968CDEB}</ns2:equipmentIdentifier>\r
+                     <ns2:transmissionType>LN</ns2:transmissionType>\r
+                     <ns2:fromStation></ns2:fromStation>\r
+                     <ns2:normalState></ns2:normalState>\r
+                     <ns2:outageState>O</ns2:outageState>\r
+                     <ns2:voltage></ns2:voltage>\r
+                     <ns2:projectName></ns2:projectName>\r
+                     <ns2:emergencyRestorationTime>1</ns2:emergencyRestorationTime>\r
+                     <ns2:natureOfWork>OE</ns2:natureOfWork>\r
+                  </ns2:TransmissionOutage>\r
+                  <ns2:Schedule>\r
+                     <ns2:plannedStart>2023-02-10T10:00:00</ns2:plannedStart>\r
+                     <ns2:plannedEnd>2023-02-11T12:00:00</ns2:plannedEnd>\r
+                     <ns2:earliestStart>2023-02-10T10:00:00</ns2:earliestStart>\r
+                     <ns2:latestEnd>2023-02-11T12:00:00</ns2:latestEnd>\r
+                  </ns2:Schedule>\r
+                  <ns2:OSNotes>\r
+                     <ns2:RequestorNotes>\r
+                        <ns2:Note>\r
+                           <ns2:createdTime>2022-11-22T11:00:00</ns2:createdTime>\r
+                           <ns2:createdBy>AEPUser</ns2:createdBy>\r
+                           <ns2:company>TAEPTC</ns2:company>\r
+                           <ns2:comment>EIP call test</ns2:comment>\r
+                        </ns2:Note>\r
+                     </ns2:RequestorNotes>\r
+                  </ns2:OSNotes>\r
+               </ns2:Outage>\r
+            </ns2:OutageSet>\r
+         </Payload>\r
+      </RequestMessage>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username/><con:password/><con:domain/><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="/BusinessService/NodalService.serviceagent/HttpEndPoint/MarketTransactions"/><con:wsrmConfig version="1.2"/></con:call><con:call id="b674ab3c-c650-4e74-a887-5c4df3a27524" name="MandatoryPayload_SubmitOutage_WO_ns2Prefix" outgoingWss="ERCOT_Cert" sslKeystore="API Outplan OSI TCC MOTE.pfx"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://testmisapi.ercot.com/2007-08/Nodal/eEDS/EWS/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <RequestMessage xmlns="http://www.ercot.com/schema/2007-06/nodal/ews/message">\r
+         <Header>\r
+            <Verb>create</Verb>\r
+            <Noun>OutageSet</Noun>\r
+            <ReplayDetection>\r
+               <Nonce>98</Nonce>\r
+               <Created>2023-01-09T00:33:49.349-07:00</Created>\r
+            </ReplayDetection>\r
+            <Revision>004</Revision>\r
+            <Source>TAEPTC</Source>\r
+            <!--Optional:-->\r
+            <UserID>API_OutplanOSITCC</UserID>\r
+         </Header>\r
+         <Payload>\r
+            <OutageSet xmlns="http://www.ercot.com/schema/2007-06/nodal/ews">\r
+               <Outage>\r
+                  <OutageInfo>\r
+                     <outageType>PL</outageType>\r
+                     <Requestor>\r
+                        <name>API_OutplanOSITCC</name>\r
+                        <userFullName>API OutplanOSITCC</userFullName>\r
+                        <primaryContact>512-481-4545</primaryContact>\r
+                     </Requestor>\r
+                     <Disclaimer>temp disclaimer</Disclaimer>\r
+                     <disclaimerAck>true</disclaimerAck>\r
+                  </OutageInfo>\r
+                  <TransmissionOutage>\r
+                     <operatingCompany>TAEPTC</operatingCompany>\r
+                     <equipmentName>6014</equipmentName>\r
+                     <equipmentIdentifier>_{28E961BD-19ED-4A26-9068-3C009EAB11E5}</equipmentIdentifier>\r
+                     <transmissionType>DSC</transmissionType>\r
+                     <outageState>O</outageState>\r
+                     <voltage>138</voltage>\r
+                     <projectName>AEP</projectName>\r
+                     <emergencyRestorationTime>1</emergencyRestorationTime>\r
+                     <natureOfWork>OE</natureOfWork>\r
+                  </TransmissionOutage>\r
+                  <Schedule>\r
+                     <plannedStart>2023-03-09T10:00:00</plannedStart>\r
+                     <plannedEnd>2023-03-09T12:00:00</plannedEnd>\r
+                     <earliestStart>2023-03-09T10:00:00</earliestStart>\r
+                     <latestEnd>2023-03-09T12:00:00</latestEnd>\r
+                  </Schedule>\r
+               </Outage>\r
+            </OutageSet>\r
+         </Payload>\r
+      </RequestMessage>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username/><con:password/><con:domain/><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="/BusinessService/NodalService.serviceagent/HttpEndPoint/MarketTransactions"/><con:wsrmConfig version="1.2"/></con:call><con:call id="a8d890c7-1ba8-4b65-9cc4-112caa4b963f" name="OutageQuery_ByCompany" outgoingWss="ERCOT_Cert" sslKeystore="API Outplan OSI TCC MOTE.pfx"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://testmisapi.ercot.com/2007-08/Nodal/eEDS/EWS/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <RequestMessage xmlns="http://www.ercot.com/schema/2007-06/nodal/ews/message">\r
+         <Header>\r
+            <Verb>get</Verb>\r
+            <Noun>OutageSet</Noun>\r
+            <ReplayDetection>\r
+               <Nonce>88667</Nonce>\r
+               <Created>2023-01-12T08:15:49.349-07:00</Created>\r
+            </ReplayDetection>\r
+            <Revision>002</Revision>\r
+            <Source>TAEPTC</Source>\r
+            <!--Optional:-->\r
+            <UserID>API_OutplanOSITCC</UserID>\r
+         </Header>\r
+         <Payload>\r
+            <OutageQuery xmlns="http://www.ercot.com/schema/2007-06/nodal/ews">\r
+               <requestorInfoQuery>\r
+                  <outageCategory>Transmission</outageCategory>\r
+                  <requestingCompanyList>\r
+                     <listItem>TAEPTC</listItem>\r
+                  </requestingCompanyList>\r
+               </requestorInfoQuery>\r
+            </OutageQuery>\r
+         </Payload>\r
+      </RequestMessage>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username/><con:password/><con:domain/><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="/BusinessService/NodalService.serviceagent/HttpEndPoint/MarketTransactions"/><con:wsrmConfig version="1.2"/></con:call><con:call id="4b9afb6f-aa86-46ee-9a6e-9608594f0be3" name="OutageQuery_ByErcotStatus" outgoingWss="ERCOT_Cert" sslKeystore="API Outplan OSI TCC MOTE.pfx"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://testmisapi.ercot.com/2007-08/Nodal/eEDS/EWS/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <RequestMessage xmlns="http://www.ercot.com/schema/2007-06/nodal/ews/message">\r
+         <Header>\r
+            <Verb>get</Verb>\r
+            <Noun>OutageSet</Noun>\r
+            <ReplayDetection>\r
+               <Nonce>656</Nonce>\r
+               <Created>2023-01-05T02:50:49.349-07:00</Created>\r
+            </ReplayDetection>\r
+            <Revision>004</Revision>\r
+            <Source>TAEPTC</Source>\r
+            <!--Optional:-->\r
+            <UserID>API_OutplanOSITCC</UserID>\r
+         </Header>\r
+         <Payload>\r
+            <OutageQuery xmlns="http://www.ercot.com/schema/2007-06/nodal/ews">\r
+               <requestorInfoQuery/>\r
+               <outageInfoQuery>\r
+                  <outageStatusList>\r
+                     <listItem>Accpt</listItem>\r
+                  </outageStatusList>\r
+               </outageInfoQuery>\r
+            </OutageQuery>\r
+         </Payload>\r
+      </RequestMessage>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username/><con:password/><con:domain/><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="/BusinessService/NodalService.serviceagent/HttpEndPoint/MarketTransactions"/><con:wsrmConfig version="1.2"/></con:call><con:call id="cf78035b-48c6-4180-9317-4232ae0d88cf" name="OutageQuery_BymrID" sslKeystore="API Outplan OSI TCC MOTE.pfx" outgoingWss="ERCOT_Cert"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://testmisapi.ercot.com/2007-08/Nodal/eEDS/EWS/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <RequestMessage xmlns="http://www.ercot.com/schema/2007-06/nodal/ews/message">\r
+         <Header>\r
+            <Verb>get</Verb>\r
+            <Noun>OutageSet</Noun>\r
+            <ReplayDetection>\r
+               <Nonce>656</Nonce>\r
+               <Created>2023-01-05T02:59:49.349-07:00</Created>\r
+            </ReplayDetection>\r
+            <Revision>004</Revision>\r
+            <Source>TAEPTC</Source>\r
+            <!--Optional:-->\r
+            <UserID>API_OutplanOSITCC</UserID>\r
+         </Header>\r
+         <Request>\r
+            <ID>TLCRA.OTG.PL.Transmission.LCR00118301</ID>\r
+         </Request>\r
+      </RequestMessage>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username/><con:password/><con:domain/><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="/BusinessService/NodalService.serviceagent/HttpEndPoint/MarketTransactions"/><con:wsrmConfig version="1.2"/></con:call><con:call id="ac2110ce-ead2-4304-a657-15f803bdb7c0" name="Submit_GroupOutage" outgoingWss="ERCOT_Cert" sslKeystore="API Outplan OSI TCC MOTE.pfx"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://testmisapi.ercot.com/2007-08/Nodal/eEDS/EWS/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <RequestMessage xmlns="http://www.ercot.com/schema/2007-06/nodal/ews/message">\r
+         <Header>\r
+            <Verb>create</Verb>\r
+            <Noun>OutageSet</Noun>\r
+            <ReplayDetection>\r
+               <Nonce>0009</Nonce>\r
+               <Created>2023-01-13T23:44:00-07:00</Created>\r
+            </ReplayDetection>
+            <Revision>004</Revision>\r
+            <Source>TAEPTC</Source>\r
+            <!--Optional:-->\r
+            <UserID>API_OutplanOSITCC</UserID>\r
+         </Header>\r
+         <Payload>\r
+            <OutageSet xmlns="http://www.ercot.com/schema/2007-06/nodal/ews">\r
+               <Outage>\r
+                  <OutageInfo>\r
+                     <outageType>PL</outageType>\r
+                     <participant>TAEPTC</participant>\r
+                     
+                     <Requestor>\r
+                        <name>2241</name>\r
+                        <userFullName>Alex Smith</userFullName>\r
+                        <tertiaryContact>512-555-1234</tertiaryContact>
+
+                     </Requestor>\r
+                     <Disclaimer>Temp Disclaimer</Disclaimer>\r
+                     <disclaimerAck>true</disclaimerAck>\r
+                  </OutageInfo>\r
+                  <Group>\r
+                     <name>Grp2</name>\r
+                     <GroupTransmissionOutage>\r
+                        <operatingCompany>TAEPTC</operatingCompany>\r
+                        <equipmentName>6014</equipmentName>\r
+                        <equipmentIdentifier>_{28E961BD-19ED-4A26-9068-3C009EAB11E5}</equipmentIdentifier>\r
+                        <transmissionType>DSC</transmissionType>\r
+                        <fromStation></fromStation>
+                        <outageState>O</outageState>
+                        <voltage>69</voltage>\r
+                        <projectName>Project2</projectName>\r
+                        <emergencyRestorationTime>1</emergencyRestorationTime>\r
+                        <natureOfWork>RE</natureOfWork>\r
+                     </GroupTransmissionOutage>\r
+                     <GroupTransmissionOutage>\r
+                        <operatingCompany>TAEPTC</operatingCompany>\r
+                        <equipmentName>6035</equipmentName>\r
+                        <equipmentIdentifier>_{7EEF8BDC-BA64-4331-B4F9-A16816B72F9F}</equipmentIdentifier>\r
+                        <transmissionType>CB</transmissionType>\r
+                        <fromStation></fromStation>
+                        <outageState>O</outageState>
+                        <voltage>138</voltage>\r
+                        <projectName>Project3</projectName>\r
+                        <emergencyRestorationTime>1</emergencyRestorationTime>\r
+                        <natureOfWork>RE</natureOfWork>\r
+                     </GroupTransmissionOutage>\r
+                  </Group>\r
+                  <Schedule>\r
+                     <plannedStart>2023-03-19T10:13:00-07:00</plannedStart>\r
+                     <plannedEnd>2023-03-20T10:13:00-07:00</plannedEnd>\r
+                     <earliestStart>2023-03-19T10:13:00-07:00</earliestStart>\r
+                     <latestEnd>2023-03-20T10:13:00-07:00</latestEnd>\r
+                  </Schedule>\r
+               </Outage>\r
+            </OutageSet>\r
+         </Payload>\r
+      </RequestMessage>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username/><con:password/><con:domain/><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="/BusinessService/NodalService.serviceagent/HttpEndPoint/MarketTransactions"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer><con:crypto><con:source>Certs/API Outplan OSI TCC MOTE.pfx</con:source><con:password>AEP</con:password><con:type>KEYSTORE</con:type></con:crypto><con:outgoing mustUnderstand="false"><con:name>ERCOT_Cert</con:name><con:username/><con:password/><con:entry type="Signature" password="AEP" username="{ebccd7dc-cbd9-4771-9c1e-e13907a060ec}"><con:configuration><crypto>API Outplan OSI TCC MOTE.pfx</crypto><keyIdentifierType>1</keyIdentifierType><signatureAlgorithm>http://www.w3.org/2000/09/xmldsig#rsa-sha1</signatureAlgorithm><signatureCanonicalization>http://www.w3.org/2001/10/xml-exc-c14n#</signatureCanonicalization><useSingleCert>true</useSingleCert><digestAlgorithm/><customTokenValueType/><customTokenId/></con:configuration></con:entry></con:outgoing></con:wssContainer><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

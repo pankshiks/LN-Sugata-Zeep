@@ -1,0 +1,52 @@
+<Payload>
+  <OutageSet xmlns="http://www.ercot.com/schema/2007-06/nodal/ews">
+      <Outage>
+        <OutageInfo>
+            <outageType>PL</outageType>
+            <participant>TAEPTC</participant>
+            
+            <Requestor>
+              <name>2241</name>
+              <userFullName>Alex Smith</userFullName>
+              <tertiaryContact>512-555-1234</tertiaryContact>
+
+            </Requestor>
+            <Disclaimer>Temp Disclaimer</Disclaimer>
+            <disclaimerAck>true</disclaimerAck>
+        </OutageInfo>
+        <Group>
+            <name>Grp2</name>
+            <GroupTransmissionOutage>
+              <operatingCompany>TAEPTC</operatingCompany>
+              <equipmentName>6014</equipmentName>
+              <equipmentIdentifier>_{28E961BD-19ED-4A26-9068-3C009EAB11E5}</equipmentIdentifier>
+              <transmissionType>DSC</transmissionType>
+              <fromStation></fromStation>
+              <outageState>O</outageState>
+              <voltage>69</voltage>
+              <projectName>Project2</projectName>
+              <emergencyRestorationTime>1</emergencyRestorationTime>
+              <natureOfWork>RE</natureOfWork>
+            </GroupTransmissionOutage>
+            <GroupTransmissionOutage>
+              <operatingCompany>TAEPTC</operatingCompany>
+              <equipmentName>6035</equipmentName>
+              <equipmentIdentifier>_{7EEF8BDC-BA64-4331-B4F9-A16816B72F9F}</equipmentIdentifier>
+              <transmissionType>CB</transmissionType>
+              <fromStation></fromStation>
+              <outageState>O</outageState>
+              <voltage>138</voltage>
+              <projectName>Project3</projectName>
+              <emergencyRestorationTime>1</emergencyRestorationTime>
+              <natureOfWork>RE</natureOfWork>
+            </GroupTransmissionOutage>
+        </Group>
+        <Schedule>
+            <plannedStart>2023-03-19T10:13:00-07:00</plannedStart>
+            <plannedEnd>2023-03-20T10:13:00-07:00</plannedEnd>
+            <earliestStart>2023-03-19T10:13:00-07:00</earliestStart>
+            <latestEnd>2023-03-20T10:13:00-07:00</latestEnd>
+        </Schedule>
+      </Outage>
+  </OutageSet>
+</Payload>
