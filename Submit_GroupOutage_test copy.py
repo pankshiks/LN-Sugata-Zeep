@@ -44,7 +44,7 @@ logging.config.dictConfig({
 })
 
 def text_get(match):
-  with open("Ercot_constants.rc", "r") as file:
+  with open("Ercot_config.rc.default", "r") as file:
       for line in file:
           line = line.replace(' ', '')
           line = line.replace('\n','')
@@ -53,10 +53,6 @@ def text_get(match):
           if param in line:
               matchess = re.search(r'=(.*)', line)
               return matchess.group(1)
-
-# this function is used for convert string into lower 
-def equalignoreCase(param):
-    return param.lower()
 
 class BinarySignatureTimestamp(BinarySignature):
     def apply(self, envelope, headers):
@@ -151,7 +147,6 @@ transmissionType = ''
 ercotname = ''
 voltage = ''
 status = ''
-o_status=''
 plannedStart = ''
 plannedEnd = ''
 earlistStart = ''
@@ -170,38 +165,13 @@ except Exception as e:
 f.close()
 
 for item in contents:
-
-    description = item['description']
-    createdAt   = item['createdAt']
-    if 'fromStation'in item:
-        fromStation = ""
-    else:
-        fromStation= ""
-
-    # if 'projectName'in item:
-    #     projectName = "AEP"
-    # else:
-    #     projectName= "AEP"
-
-    username = item['updatedByUser']['userDisplayName']
-
     if 'equipmentOutages' in item:
         equipmentOutages = item['equipmentOutages']
     if 'customFieldValuesExt' in item:
         eroctNatureOfWork = item['customFieldValuesExt']['ERCOT_nature_of_work-T']
         emerRestInHours = item['customFieldValuesExt']['ERCOT_emergency_restoration_in_hours']
-        ercotOutageType = item['customFieldValuesExt']['ERCOT_outage_type-T']
    
 for equipment in equipmentOutages:
-    if 'status' in equipment:
-        status = equipment['status']
-        if equalignoreCase(status) == equalignoreCase("OPEN"):
-            status = "O"
-        elif equalignoreCase(status) == equalignoreCase("Close"):
-            status = "C"
-        else: 
-            status= ""
-    
     if 'asset' in equipment:
         type = 'CB'
         print(equipment['asset']['ERCOT Name'])
@@ -213,8 +183,6 @@ for equipment in equipmentOutages:
     if 'customFieldValuesExt' in equipment:
             #ERCOT_latest_end 
         print(equipment['customFieldValuesExt'])  
-
-    voltage =re.match('[0-9]+',equipment['asset']['Voltage'])    
   
     equipData.append({
         "operatingCompany": "TAEPTC",
@@ -223,10 +191,10 @@ for equipment in equipmentOutages:
     #   "transmissionType": equipment['asset']['_modelTypeId']
         "transmissionType": text_get(equipment['asset']['_modelTypeId']),
 
-        "fromStation": fromStation,
-        "outageState": status,
-        "voltage": voltage.group(),
-        "projectName": "",
+        "fromStation": "",
+        "outageState": "O",
+        "voltage": 138,
+        "projectName": "Project2",
         "emergencyRestorationTime": emerRestInHours,
         "natureOfWork": text_get(eroctNatureOfWork),
     })
@@ -264,18 +232,18 @@ payloadData =  {
     "OutageSet": {
       "Outage": {
         "OutageInfo": {
-          "outageType":"PL",
+          "outageType": "PL",
           "participant": "TAEPTC",
           "Requestor": {
             "name": 2241,
-            "userFullName": username,
+            "userFullName": "Alex Smith",
             "tertiaryContact": "512-555-1234"
           },
           "Disclaimer": "Temp Disclaimer",
           "disclaimerAck": True
         },
         "Group": {
-          "name": "GRP1",
+          "name": "Grp2",
           "GroupTransmissionOutage": (equipData)
         },
        "Schedule": {
@@ -283,27 +251,11 @@ payloadData =  {
           "plannedEnd": datetime_format(plannedEnd),
           "earliestStart": earlistStart,
           "latestEnd": ercotLatestEnd
-        },
-        "OSNotes":{
-            "RequestorNotes":{
-                "Note":{
-                    "createdTime":datetime_format(plannedStart),
-                    "createdBy":"AEPUser",
-                    "company":"TAEPTC",
-                    "comment":description
-                }
-            }
         }
       }
     }
   }
 } 
-
-# <ns2:createdTime>2022-11-22T11:00:00</ns2:createdTime>
-#                            <ns2:createdBy>AEPUser</ns2:createdBy>
-#                            <ns2:company>TAEPTC</ns2:company>
-#                            <ns2:comment>EIP call test</ns2:comment>
-
  
 # print(payloadData)
 with client.settings(raw_response=True):

@@ -66,20 +66,20 @@
 								<xsd:complexType>
 									<xsd:sequence>
 										<xsd:element name="RequestorNotes">
-										<xsd:complexType>
-											<xsd:sequence>
-											<xsd:element name="Note">
-												<xsd:complexType>
+											<xsd:complexType>
 												<xsd:sequence>
-													<xsd:element name="createdTime" type="xsd:dateTime" />
-													<xsd:element name="createdBy" type="xsd:string" />
-													<xsd:element name="company" type="xsd:string" />
-													<xsd:element name="comment" type="xsd:string" />
+													<xsd:element name="Note">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="createdTime" type="xsd:dateTime" />
+																<xsd:element name="createdBy" type="xsd:string" />
+																<xsd:element name="company" type="xsd:string" />
+																<xsd:element name="comment" type="xsd:string" />
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
 												</xsd:sequence>
-												</xsd:complexType>
-											</xsd:element>
-											</xsd:sequence>
-										</xsd:complexType>
+											</xsd:complexType>
 										</xsd:element>
 									</xsd:sequence>
 								</xsd:complexType>
