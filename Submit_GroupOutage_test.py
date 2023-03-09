@@ -264,7 +264,7 @@ payloadData =  {
     "OutageSet": {
       "Outage": {
         "OutageInfo": {
-          "outageType":"PL",
+          "outageType":text_get(ercotOutageType),
           "participant": "TAEPTC",
           "Requestor": {
             "name": 2241,
