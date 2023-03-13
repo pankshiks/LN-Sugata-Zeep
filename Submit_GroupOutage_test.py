@@ -201,20 +201,12 @@ for equipment in equipmentOutages:
             status = "C"
         else: 
             status= ""
-    
-    if 'asset' in equipment:
-        type = 'CB'
-        print(equipment['asset']['ERCOT Name'])
-        # print(equipment['asset']._modelTypeId)
-        if(equipment['asset']['ERCOT Name'] == '6014'):
-            type = "DSC"
-        else:
-            type = 'CB'
+
     if 'customFieldValuesExt' in equipment:
             #ERCOT_latest_end 
         print(equipment['customFieldValuesExt'])  
 
-    voltage =re.match('[0-9]+',equipment['asset']['Voltage'])    
+    voltage = re.match('[0-9]+',equipment['asset']['Voltage'])    
   
     equipData.append({
         "operatingCompany": "TAEPTC",
@@ -222,7 +214,6 @@ for equipment in equipmentOutages:
         "equipmentIdentifier": equipment['asset']['ERCOT RDFID'],
     #   "transmissionType": equipment['asset']['_modelTypeId']
         "transmissionType": text_get(equipment['asset']['_modelTypeId']),
-
         "fromStation": fromStation,
         "outageState": status,
         "voltage": voltage.group(),
@@ -252,7 +243,7 @@ payloadData =  {
     "Verb": "create",
     "Noun": "OutageSet",
     "ReplayDetection": {
-      "Nonce": 9,
+      "Nonce": generate_nonce(15),
       "Created": date
     },
     "Revision": 4,
