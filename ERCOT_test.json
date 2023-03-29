@@ -68,9 +68,9 @@
                     "6384f28e173b7659812a6ed7": "2023-02-04T21:00:00Z"
                 },
                 "customTableValues": {},
-                "requestID": "63b730fb6c02026ac066833f",
-                "plannedStart": "2023-08-15T18:00:00Z",
-                "plannedEnd": "2023-08-16T00:00:00Z",
+                "requestID": "63b731706c02026ac0668352",
+                "plannedStart": "2024-09-04T18:00:00Z",
+                "plannedEnd": "2024-09-05T00:00:00Z",
                 "plannedDuration": 381600000,
                 "status": "OPEN",
                 "assetExtID": "5f23d8ad-aa52-4f96-bef1-fcb51be9e0bf",
@@ -97,8 +97,8 @@
                     "_updatedAt": "2023-01-05T20:00:04.749Z"
                 },
                 "customFieldValuesExt": {
-                    "ERCOT_earliest_start": "2023-08-015T18:00:00Z",
-                    "ERCOT_latest_end": "2023-08-016T00:00:00Z"
+                    "ERCOT_earliest_start": "2024-09-04T18:00:00Z",
+                    "ERCOT_latest_end": "2024-09-05T00:00:00Z"
                 },
                 "customTableValuesExt": {}
             },
@@ -121,8 +121,8 @@
                 },
                 "customTableValues": {},
                 "requestID": "63b730fb6c02026ac066833f",
-                "plannedStart": "2023-08-15T18:00:00Z",
-                "plannedEnd": "2023-08-16T00:00:00Z",
+                "plannedStart": "2024-09-04T18:00:00Z",
+                "plannedEnd": "2024-09-05T00:00:00Z",
                 "plannedDuration": 381600000,
                 "status": "OPEN",
                 "assetExtID": "5f23d8ad-aa52-4f96-bef1-fcb51be9e0bf",
@@ -149,8 +149,8 @@
                     "_updatedAt": "2023-01-05T20:00:04.749Z"
                 },
                 "customFieldValuesExt": {
-                    "ERCOT_earliest_start": "2023-08-15T18:00:00Z",
-                    "ERCOT_latest_end": "2023-08-16T00:00:00Z"
+                    "ERCOT_earliest_start": "2024-09-04T18:00:00Z",
+                    "ERCOT_latest_end": "2024-09-05T00:00:00Z"
                 },
                 "customTableValuesExt": {}
             }

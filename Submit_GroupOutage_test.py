@@ -159,7 +159,9 @@ ercotLatestEnd = ''
 equipData = []
 some_data = []
 
-
+responseData = []
+response = []
+equipmentOutageIds = []
 
 #Read JSON FILE
 try:
@@ -170,7 +172,7 @@ except Exception as e:
 f.close()
 
 for item in contents:
-
+    print(item)
     description = item['description']
     createdAt   = item['createdAt']
     if 'fromStation'in item:
@@ -184,7 +186,6 @@ for item in contents:
     #     projectName= "AEP"
 
     username = item['updatedByUser']['userDisplayName']
-
     if 'equipmentOutages' in item:
         equipmentOutages = item['equipmentOutages']
     if 'customFieldValuesExt' in item:
@@ -206,7 +207,7 @@ for equipment in equipmentOutages:
             #ERCOT_latest_end 
         print(equipment['customFieldValuesExt'])  
 
-    voltage = re.match('[0-9]+',equipment['asset']['Voltage'])    
+        voltage = re.match('[0-9]+',equipment['asset']['Voltage'])
   
     equipData.append({
         "operatingCompany": "TAEPTC",
@@ -237,7 +238,6 @@ for equipment in equipmentOutages:
 UTC = timezone('UTC')
 utc_dt = datetime.now(UTC)
 date = (utc_dt.isoformat( timespec="seconds"))
-print(date)
 payloadData =  {
   "Header": {
     "Verb": "create",
@@ -295,12 +295,51 @@ payloadData =  {
 #                            <ns2:company>TAEPTC</ns2:company>
 #                            <ns2:comment>EIP call test</ns2:comment>
 
- 
-# print(payloadData)
+
 with client.settings(raw_response=True):
     response = client.service.MarketTransactions(**payloadData)
 
 print("############# START RESPONSE ######")
 data_dict = xmltodict.parse(response.content)
 
-print(json.dumps(data_dict, sort_keys=True, indent=4))
+print("############# TODAY Response JSON ######")
+responseBody = data_dict['SOAP-ENV:Envelope']['SOAP-ENV:Body']
+
+replyRes = responseBody['ns0:ResponseMessage']['ns0:Reply']
+
+
+if 'ns0:ReplyCode' in replyRes and replyRes['ns0:ReplyCode'] == 'OK' :
+    outageJson = responseBody['ns0:ResponseMessage']['ns0:Payload']['ns1:OutageSet']['ns1:Outage']
+    outageGroup = outageJson['ns1:Group']['ns1:GroupTransmissionOutage']
+
+    euidpIDs = []
+    itemOutageArr = []
+    for equipmentOutage in equipmentOutages:
+        euidpIDs.append(equipmentOutage['id'])
+    
+    for index, itemOutage in enumerate(outageGroup):
+        id = euidpIDs[index]
+        itemOutageArr.append({
+            id: {
+                'customFieldValuesText': {
+                    "ERCOT_outage_ID": itemOutage['ns1:mRID']
+                }
+            }})
+           
+    response = {
+        "customFieldValuesExt": {
+            'ERCOT_group_outage_ID': outageJson['ns1:Group']['ns1:groupId'],
+            'ERCOT_outage_state': outageJson['ns1:OutageInfo']['ns1:state'],
+            'ERCOT_outage_status': outageJson['ns1:OutageInfo']['ns1:status'],
+            'ERCOT_submit_response': "{} Timestamp:-{}".format(replyRes['ns0:ReplyCode'],replyRes['ns0:Timestamp']),
+            "ERCOT_supporting_notes":outageJson['ns1:OSNotes']['ns1:SupportingNotes'],
+            "ERCOT_rasps_notes":outageJson['ns1:OSNotes']['ns1:RASPSNotes'],
+            "ns1:SupportingNotes":outageJson['ns1:OSNotes']['ns1:ReviewerNotes'],
+        },
+        'equipmentOutages': itemOutageArr
+    }
+
+print(json.dumps(response, sort_keys=True, indent=4))
+
+with open("result.json", "w") as outfile:
+    outfile.write(json.dumps(response, indent=4))
