@@ -1,9 +1,9 @@
 {
     "customFieldValuesExt": {
-        "ERCOT_group_outage_ID": "TAEPTC.OTG.101188",
+        "ERCOT_group_outage_ID": "TAEPTC.OTG.101111",
         "ERCOT_outage_state": "ENYS",
         "ERCOT_outage_status": "RatE",
-        "ERCOT_submit_response": "OK Timestamp:-2023-03-29T08:00:24.537-05:00",
+        "ERCOT_submit_response": "OK Timestamp:-2023-02-23T06:46:16.602-06:00",
         "ERCOT_supporting_notes": null,
         "ERCOT_rasps_notes": null,
         "ns1:SupportingNotes": null
@@ -12,14 +12,14 @@
         {
             "63b731316c02026ac0668349": {
                 "customFieldValuesText": {
-                    "ERCOT_outage_ID": "TAEPTC.OTG.SM.Transmission.AEP00075010"
+                    "ERCOT_outage_ID": "TAEPTC.OTG.PL.Transmission.AEP00074758"
                 }
             }
         },
         {
             "63b731706c02026ac0668352": {
                 "customFieldValuesText": {
-                    "ERCOT_outage_ID": "TAEPTC.OTG.SM.Transmission.AEP00075011"
+                    "ERCOT_outage_ID": "TAEPTC.OTG.PL.Transmission.AEP00074759"
                 }
             }
         }

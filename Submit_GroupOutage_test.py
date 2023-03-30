@@ -46,13 +46,25 @@ logging.config.dictConfig({
 def text_get(match):
   with open("Ercot_constants.rc", "r") as file:
       for line in file:
-          line = line.replace(' ', '')
-          line = line.replace('\n','')
-          param = match.replace(' ', '')
-
-          if param in line:
+        line = line.replace(' ', '')
+        line = line.replace('\n','')
+        param = match.replace(' ', '')
+        if param in line:
               matchess = re.search(r'=(.*)', line)
               return matchess.group(1)
+
+#this function is used for get string text before = sign in text file
+def text_response_get(match):
+  with open("Ercot_constants.rc", "r") as file:
+      for line in file:
+        line = line.replace(' ', ' ')
+        line = line.replace('\n',' ')
+        param = match.replace(' ', ' ')
+     
+        if param in line:
+            text = line.split('=')[0].split('.')[1].strip()
+
+            return text
 
 # this function is used for convert string into lower 
 def equalignoreCase(param):
@@ -172,7 +184,6 @@ except Exception as e:
 f.close()
 
 for item in contents:
-    print(item)
     description = item['description']
     createdAt   = item['createdAt']
     if 'fromStation'in item:
@@ -205,9 +216,9 @@ for equipment in equipmentOutages:
 
     if 'customFieldValuesExt' in equipment:
             #ERCOT_latest_end 
-        print(equipment['customFieldValuesExt'])  
+        # print(equipment['customFieldValuesExt'])  
 
-        voltage = re.match('[0-9]+',equipment['asset']['Voltage'])
+        voltage = re.match('[0-9]+',equipment['asset']['Voltage'])    
   
     equipData.append({
         "operatingCompany": "TAEPTC",
@@ -311,7 +322,7 @@ replyRes = responseBody['ns0:ResponseMessage']['ns0:Reply']
 if 'ns0:ReplyCode' in replyRes and replyRes['ns0:ReplyCode'] == 'OK' :
     outageJson = responseBody['ns0:ResponseMessage']['ns0:Payload']['ns1:OutageSet']['ns1:Outage']
     outageGroup = outageJson['ns1:Group']['ns1:GroupTransmissionOutage']
-
+    notes = outageJson['ns1:OSNotes']
     euidpIDs = []
     itemOutageArr = []
     for equipmentOutage in equipmentOutages:
@@ -325,21 +336,29 @@ if 'ns0:ReplyCode' in replyRes and replyRes['ns0:ReplyCode'] == 'OK' :
                     "ERCOT_outage_ID": itemOutage['ns1:mRID']
                 }
             }})
-           
+    
+
     response = {
         "customFieldValuesExt": {
             'ERCOT_group_outage_ID': outageJson['ns1:Group']['ns1:groupId'],
-            'ERCOT_outage_state': outageJson['ns1:OutageInfo']['ns1:state'],
-            'ERCOT_outage_status': outageJson['ns1:OutageInfo']['ns1:status'],
+            'ERCOT_outage_state': text_response_get(outageJson['ns1:OutageInfo']['ns1:state']),
+            'ERCOT_outage_status': text_response_get(outageJson['ns1:OutageInfo']['ns1:status']),
             'ERCOT_submit_response': "{} Timestamp:-{}".format(replyRes['ns0:ReplyCode'],replyRes['ns0:Timestamp']),
-            "ERCOT_supporting_notes":outageJson['ns1:OSNotes']['ns1:SupportingNotes'],
-            "ERCOT_rasps_notes":outageJson['ns1:OSNotes']['ns1:RASPSNotes'],
-            "ns1:SupportingNotes":outageJson['ns1:OSNotes']['ns1:ReviewerNotes'],
         },
         'equipmentOutages': itemOutageArr
     }
 
+    if 'ns1:SupportingNotes' in notes and notes['ns1:SupportingNotes'] is not None:
+        response["customFieldValuesExt"]["ERCOT_supporting_notes"] = notes['ns1:SupportingNotes']
+
+    if 'ns1:RASPSNotes' in notes and notes['ns1:RASPSNotes'] is not None:
+        response["customFieldValuesExt"]["ERCOT_rasps_notes"] = notes['ns1:RASPSNotes']
+
+    if 'ns1:ReviewerNotes' in notes and notes['ns1:ReviewerNotes'] is not None:
+        response["customFieldValuesExt"]["ERCOT_reviewer_notes"] = notes['ns1:ReviewerNotes']
+        
+
 print(json.dumps(response, sort_keys=True, indent=4))
 
-with open("result.json", "w") as outfile:
-    outfile.write(json.dumps(response, indent=4))
+# with open("result.json", "w") as outfile:
+#     outfile.write(json.dumps(response, indent=4))
