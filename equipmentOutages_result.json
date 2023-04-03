@@ -1,0 +1,12 @@
+{
+  "63b731316c02026ac0668349": {
+    "customFieldValuesExt": {
+      "ERCOT_outage_ID": "TAEPTC.OTG.SM.Transmission.AEP00075030"
+    }
+  },
+  "63b731706c02026ac0668352": {
+    "customFieldValuesExt": {
+      "ERCOT_outage_ID": "TAEPTC.OTG.SM.Transmission.AEP00075031"
+    }
+  }
+}

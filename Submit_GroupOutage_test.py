@@ -318,25 +318,20 @@ responseBody = data_dict['SOAP-ENV:Envelope']['SOAP-ENV:Body']
 
 replyRes = responseBody['ns0:ResponseMessage']['ns0:Reply']
 
-
 if 'ns0:ReplyCode' in replyRes and replyRes['ns0:ReplyCode'] == 'OK' :
     outageJson = responseBody['ns0:ResponseMessage']['ns0:Payload']['ns1:OutageSet']['ns1:Outage']
     outageGroup = outageJson['ns1:Group']['ns1:GroupTransmissionOutage']
     notes = outageJson['ns1:OSNotes']
     euidpIDs = []
-    itemOutageArr = []
+    equipmentOutagesRes = {}
     for equipmentOutage in equipmentOutages:
         euidpIDs.append(equipmentOutage['id'])
     
     for index, itemOutage in enumerate(outageGroup):
         id = euidpIDs[index]
-        itemOutageArr.append({
-            id: {
-                'customFieldValuesText': {
-                    "ERCOT_outage_ID": itemOutage['ns1:mRID']
-                }
-            }})
-    
+        equipmentOutagesRes.update({id:  {
+            'customFieldValuesExt': { "ERCOT_outage_ID": itemOutage['ns1:mRID']}
+        }})
 
     response = {
         "customFieldValuesExt": {
@@ -345,7 +340,6 @@ if 'ns0:ReplyCode' in replyRes and replyRes['ns0:ReplyCode'] == 'OK' :
             'ERCOT_outage_status': text_response_get(outageJson['ns1:OutageInfo']['ns1:status']),
             'ERCOT_submit_response': "{} Timestamp:-{}".format(replyRes['ns0:ReplyCode'],replyRes['ns0:Timestamp']),
         },
-        'equipmentOutages': itemOutageArr
     }
 
     if 'ns1:SupportingNotes' in notes and notes['ns1:SupportingNotes'] is not None:
@@ -356,9 +350,16 @@ if 'ns0:ReplyCode' in replyRes and replyRes['ns0:ReplyCode'] == 'OK' :
 
     if 'ns1:ReviewerNotes' in notes and notes['ns1:ReviewerNotes'] is not None:
         response["customFieldValuesExt"]["ERCOT_reviewer_notes"] = notes['ns1:ReviewerNotes']
-        
+    
+    print(json.dumps(response, check_circular=False, indent=4))
+    print('####### equipmentOutages result ######')
 
-print(json.dumps(response, sort_keys=True, indent=4))
+    print(json.dumps(equipmentOutagesRes, sort_keys=True, indent=4))
 
-# with open("result.json", "w") as outfile:
-#     outfile.write(json.dumps(response, indent=4))
+    # Write response in result.json file #
+    with open("result.json", "w") as outfile:
+        outfile.write(json.dumps(response, sort_keys=True, indent=4))
+
+    # Write equipmentOutages in equipmentOutages_result.json file 
+    with open("equipmentOutages_result.json", "w") as outfile:
+        outfile.write(json.dumps(equipmentOutagesRes, sort_keys=True, indent=2))
