@@ -174,6 +174,7 @@ some_data = []
 responseData = []
 response = []
 equipmentOutageIds = []
+error = ''
 
 #Read JSON FILE
 try:
@@ -301,10 +302,6 @@ payloadData =  {
   }
 } 
 
-# <ns2:createdTime>2022-11-22T11:00:00</ns2:createdTime>
-#                            <ns2:createdBy>AEPUser</ns2:createdBy>
-#                            <ns2:company>TAEPTC</ns2:company>
-#                            <ns2:comment>EIP call test</ns2:comment>
 
 
 with client.settings(raw_response=True):
@@ -313,12 +310,13 @@ with client.settings(raw_response=True):
 print("############# START RESPONSE ######")
 data_dict = xmltodict.parse(response.content)
 
-print("############# TODAY Response JSON ######")
+
 responseBody = data_dict['SOAP-ENV:Envelope']['SOAP-ENV:Body']
 
 replyRes = responseBody['ns0:ResponseMessage']['ns0:Reply']
 
 if 'ns0:ReplyCode' in replyRes and replyRes['ns0:ReplyCode'] == 'OK' :
+    print("############# TODAY Response JSON ######")
     outageJson = responseBody['ns0:ResponseMessage']['ns0:Payload']['ns1:OutageSet']['ns1:Outage']
     outageGroup = outageJson['ns1:Group']['ns1:GroupTransmissionOutage']
     notes = outageJson['ns1:OSNotes']
@@ -363,3 +361,20 @@ if 'ns0:ReplyCode' in replyRes and replyRes['ns0:ReplyCode'] == 'OK' :
     # Write equipmentOutages in equipmentOutages_result.json file 
     with open("equipmentOutages_result.json", "w") as outfile:
         outfile.write(json.dumps(equipmentOutagesRes, sort_keys=True, indent=2))
+
+#Validation Error print
+elif 'ns0:ReplyCode' in replyRes and (replyRes['ns0:ReplyCode'] == 'ERROR'):
+    errorValidations = responseBody['ns0:ResponseMessage']['ns0:Payload']['ns1:OutageSet']['ns1:Outage']
+
+    if 'ns0:Error' in replyRes:
+        error = '\n'.join(replyRes['ns0:Error'])
+
+    if  'ns1:Error' in errorValidations and isinstance(errorValidations['ns1:Error'], list):
+        for errorNs in errorValidations['ns1:Error']:
+            error += '\n' + errorNs['ns1:text']
+    else:
+        error += '\n' + errorValidations['ns1:Error']['ns1:text']
+    
+print('###### Error #####')
+final_error = 'final_error= '+ error
+print(final_error)
