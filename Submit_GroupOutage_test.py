@@ -372,7 +372,7 @@ elif 'ns0:ReplyCode' in replyRes and (replyRes['ns0:ReplyCode'] == 'ERROR'):
     if  'ns1:Error' in errorValidations and isinstance(errorValidations['ns1:Error'], list):
         for errorNs in errorValidations['ns1:Error']:
             error += '\n' + errorNs['ns1:text']
-    else:
+    elif 'ns1:Error' in errorValidations:
         error += '\n' + errorValidations['ns1:Error']['ns1:text']
     
 print('###### Error #####')
