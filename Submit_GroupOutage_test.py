@@ -302,7 +302,25 @@ payloadData =  {
   }
 } 
 
+json_data = {
+    "createdTime":datetime_format(plannedStart),
+    "createdBy":"abc",
+    "company":"abc",
+    "comment":ERCOT_rasps_notes
+}
 
+json_data2 = {
+            "createdTime":datetime_format(plannedStart),
+            "createdBy":"abc",
+            "company":"abc",
+            "comment":ERCOT_supporting_notes
+        }
+
+if ERCOT_supporting_notes !="":
+    payloadData['Payload']['OutageSet']['Outage']['OSNotes']['ERCOT_supporting_notes'] = json_data2
+
+if ERCOT_rasps_notes !="":
+    payloadData['Payload']['OutageSet']['Outage']['OSNotes']['ERCOT_rasps_notes'] = json_data
 
 with client.settings(raw_response=True):
     response = client.service.MarketTransactions(**payloadData)
