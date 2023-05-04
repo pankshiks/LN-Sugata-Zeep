@@ -173,7 +173,14 @@
         "customFieldValuesExt": {
             "ERCOT_emergency_restoration_in_hours": 1,
             "ERCOT_nature_of_work-T": "Repair/Replace Damaged Equipment",
-            "ERCOT_outage_type-T": "Simple"
+            "ERCOT_outage_type-T": "Simple",
+            "ERCOT_submit_response":"OK Timestamp:-2023-05-03T04:18:14.664-05:00",
+            "ERCOT_outage_state":"Received at ERCOT",
+            "ERCOT_outage_status":"Received at ERCOT",
+            "ERCOT_reason_for_change":"Cancel Single Equipment",
+            "ERCOT_rasps_notes":"rasps notes",
+            "ERCOT_supporting_notes":"supprt",
+            "ERCOT_reason_for_cancel":"Cancel - Weather conditions"
         },
         "customTableValuesExt": {}
     }
