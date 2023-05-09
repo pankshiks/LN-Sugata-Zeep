@@ -196,18 +196,22 @@ payloadData =  {
 } 
 
 json_data = {
-    "createdTime":datetime_format(plannedStart),
-    "createdBy":"abc",
-    "company":"abc",
-    "comment":ERCOT_rasps_notes
-}
-
-json_data2 = {
+        "Note" : {
             "createdTime":datetime_format(plannedStart),
             "createdBy":"abc",
             "company":"abc",
-            "comment":ERCOT_supporting_notes
+            "comment":ERCOT_rasps_notes
         }
+    }
+
+json_data2 = {
+        "Note" : {
+                "createdTime":datetime_format(plannedStart),
+                "createdBy":"abc",
+                "company":"abc",
+                "comment":ERCOT_supporting_notes
+        }
+    }
 
 if ERCOT_supporting_notes !="":
     payloadData['Payload']['OutageSet']['Outage']['OSNotes']['ERCOT_supporting_notes'] = json_data2
