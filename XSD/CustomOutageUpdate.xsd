@@ -1,0 +1,67 @@
+<xsd:schema xmlns:tns="http://www.ercot.com/schema/2007-06/nodal/ews" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.ercot.com/schema/2007-06/nodal/ews" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:element name="OutageUpdate">
+
+    <xsd:complexType>
+
+      <xsd:sequence>
+
+        <xsd:element name="mRID" type="xsd:string" />
+
+        <xsd:element name="userFullName" type="xsd:string" />
+
+        <xsd:element name="addToGroup">
+
+          <xsd:complexType>
+
+            <xsd:sequence>
+
+              <xsd:element name="groupId" type="xsd:string" />
+
+              <xsd:element name="name" type="xsd:string" />
+
+              <xsd:element name="GroupTransmissionOutage">
+
+                <xsd:complexType>
+
+                  <xsd:sequence>
+
+                    <xsd:element name="operatingCompany" type="xsd:string" />
+
+                    <xsd:element name="equipmentName" type="xsd:unsignedShort" />
+
+                    <xsd:element name="equipmentIdentifier" type="xsd:string" />
+
+                    <xsd:element name="transmissionType" type="xsd:string" />
+
+                    <xsd:element name="fromStation" />
+
+                    <xsd:element name="outageState" type="xsd:string" />
+
+                    <xsd:element name="voltage" type="xsd:unsignedByte" />
+
+                    <xsd:element name="projectName" type="xsd:string" />
+
+                    <xsd:element name="emergencyRestorationTime" type="xsd:unsignedByte" />
+
+                    <xsd:element name="natureOfWork" type="xsd:string" />
+
+                  </xsd:sequence>
+
+                </xsd:complexType>
+
+              </xsd:element>
+
+            </xsd:sequence>
+
+          </xsd:complexType>
+
+        </xsd:element>
+
+      </xsd:sequence>
+
+    </xsd:complexType>
+
+  </xsd:element>
+
+</xsd:schema>

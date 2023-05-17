@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<soap-env:Body xmlns:ns2="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" ns2:Id="id-c7827385-b7d8-4dc7-9e0e-20907f4bfd84">
+  <ns0:RequestMessage xmlns:ns0="http://www.ercot.com/schema/2007-06/nodal/ews/message">
+    <ns0:Header>
+      <ns0:Verb>create</ns0:Verb>
+      <ns0:Noun>OutageSet</ns0:Noun>
+      <ns0:ReplayDetection>
+        <ns0:Nonce>312386226886005</ns0:Nonce>
+        <ns0:Created>2023-05-17T04:23-6:00</ns0:Created>
+      </ns0:ReplayDetection>
+      <ns0:Revision>4</ns0:Revision>
+      <ns0:Source>TAEPTC</ns0:Source>
+      <ns0:UserID>API_OutplanOSITCC</ns0:UserID>
+    </ns0:Header>
+    <ns0:Payload>
+      <ns1:OutageUpdate xmlns:ns1="http://www.ercot.com/schema/2007-06/nodal/ews">
+        <ns1:mRID>TAEPTC.OTG.PL.Transmission.AEP00075266</ns1:mRID>
+        <ns1:userFullName>Shreya</ns1:userFullName>
+        <ns1:addToGroup>
+          <ns1:groupId>TAEPTC.OTG.101290</ns1:groupId>
+          <ns1:name>Grp1</ns1:name>
+          <ns1:GroupTransmissionOutage>
+            <ns1:operatingCompany>TAEPTC</ns1:operatingCompany>
+            <ns1:equipmentName>6016</ns1:equipmentName>
+            <ns1:equipmentIdentifier>_{79955A41-E16E-4B68-BDA9-6DF27FA8E006}</ns1:equipmentIdentifier>
+            <ns1:transmissionType>Disconnect</ns1:transmissionType>
+            <ns1:fromStation>Lon Hill PS</ns1:fromStation>
+            <ns1:outageState>OUT_OF_SERVICE</ns1:outageState>
+            <ns1:voltage>138</ns1:voltage>
+            <ns1:projectName/>
+            <ns1:emergencyRestorationTime>1</ns1:emergencyRestorationTime>
+            <ns1:natureOfWork>Repair/Replace Damaged Equipment</ns1:natureOfWork>
+          </ns1:GroupTransmissionOutage>
+        </ns1:addToGroup>
+      </ns1:OutageUpdate>
+    </ns0:Payload>
+  </ns0:RequestMessage>
+</soap-env:Body>

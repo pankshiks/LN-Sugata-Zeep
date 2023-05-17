@@ -14,8 +14,7 @@
 <xsd:schema xmlns="http://www.ercot.com/schema/2007-06/nodal/ews/message" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsse="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" targetNamespace="http://www.ercot.com/schema/2007-06/nodal/ews/message" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.3.3">
 	<xsd:import namespace="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="WSS200401wssecurity-secext-10.xsd"/>
 	<xsd:import namespace="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" schemaLocation="WSS200401wssecurity-utility-10.xsd"/>
-
-  <xsd:import schemaLocation="CustomOutageUpdate.xsd" namespace="http://www.ercot.com/schema/2007-06/nodal/ews" />
+  <xsd:import schemaLocation="schema1.xsd" namespace="http://www.ercot.com/schema/2007-06/nodal/ews" />
 	<xsd:complexType name="RequestType">
 		<xsd:sequence>
 			<xsd:element name="MarketType" minOccurs="0">
@@ -53,9 +52,7 @@
 	</xsd:complexType>
 	<xsd:complexType name="PayloadType">
 		<xsd:sequence>
-     <!-- <xsd:element xmlns:q1="http://www.ercot.com/schema/2007-06/nodal/ews" ref="q1:OutageSet" minOccurs="0" maxOccurs="unbounded"/> -->
-	 <!-- <xsd:element xmlns:q2="http://www.ercot.com/schema/2007-06/nodal/ews" ref="q2:OutageCancel" minOccurs="0" maxOccurs="unbounded"/> -->
-	 <xsd:element xmlns:q3="http://www.ercot.com/schema/2007-06/nodal/ews" ref="q3:OutageUpdate" minOccurs="0" maxOccurs="unbounded"/>
+     <xsd:element xmlns:q1="http://www.ercot.com/schema/2007-06/nodal/ews" ref="q1:OutageSet" />
 
 			<!-- <xsd:choice>
 				<xsd:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
@@ -121,8 +118,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="Header" type="HeaderType"/>
-				<xsd:element name="Request" type="RequestType" minOccurs="0"/>
-				<xsd:element name="Payload" type="PayloadType" minOccurs="0"/>			
+				<xsd:element name="Payload" type="PayloadType" minOccurs="0"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>

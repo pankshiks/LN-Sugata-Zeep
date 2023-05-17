@@ -1,0 +1,37 @@
+{
+   "Header":{
+      "Verb":"create",
+      "Noun":"OutageSet",
+      "ReplayDetection":{
+         "Nonce":"252945056350587",
+         "Created":"2023-05-17T04:23-6:00"
+      },
+      "Revision":4,
+      "Source":"TAEPTC",
+      "UserID":"API_OutplanOSITCC"
+   },
+   "Payload":{
+      "OutageUpdate":{
+         "mRID":"TAEPTC.OTG.PL.Transmission.AEP00075266",
+         "userFullName":"Shreya",
+         "addToGroup":{
+            "groupId":"TAEPTC.OTG.101290",
+            "name":"Grp1",
+            "GroupTransmissionOutage":[
+               {
+                  "operatingCompany":"TAEPTC",
+                  "equipmentName":"6016",
+                  "equipmentIdentifier":"_{79955A41-E16E-4B68-BDA9-6DF27FA8E006}",
+                  "transmissionType":"Disconnect",
+                  "fromStation":"Lon Hill PS",
+                  "outageState":"OUT_OF_SERVICE",
+                  "voltage":"138",
+                  "projectName":"",
+                  "emergencyRestorationTime":1,
+                  "natureOfWork":"Repair/Replace Damaged Equipment"
+               }
+            ]
+         }
+      }
+   }
+}

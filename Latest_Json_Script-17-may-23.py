@@ -133,16 +133,16 @@ def datetime_format(currentDate):
         return currentDate
 
 # CERTIFICATES PATHS
-# backup of old certificate under XSD folder
 
 api_p12_key = os.path.join('./Certs/API Outplan OSI TCC MOTE.p12')
-api_certificate = os.path.join('./Certs/OSITCC.crt')
+api_certificate = os.path.join('./Certs/OSITCC.crt')# ./new_updates/OSITCC.crt
+# api_certificate = os.path.join('./New_updates/OSITCC.crt')# ./New_updates/OSITCC.crt
 api_pfx_key = os.path.join('./Certs/API Outplan OSI TCC MOTE.pfx')
 
 # SETUP
 wsdl_file = os.path.join('./XSD/Nodal.wsdl')
 
-api_base_url = "https://testmisapi.ercot.com"
+api_base_url = "https://testmisapi.ercot.com/2007-08/Nodal/eEDS/EWS/"
 session = requests.Session()
 session.mount(api_base_url, Pkcs12Adapter(pkcs12_filename=api_p12_key, pkcs12_password='AEP'))
 session.verify = None
@@ -176,10 +176,14 @@ responseData = []
 response = []
 equipmentOutageIds = []
 error = ''
+outage_IDs = []
+ercot_Name = ''
+ercot_Rdfid = ''
+ERCOT_group_outage_ID = ''
 
 #Read JSON FILE
 try:
-    with open("ERCOT_test.json") as f:
+    with open("./New_updates/add-eqp.json") as f:
         contents = json.load(f)
 except Exception as e:
     print(e)
@@ -188,15 +192,6 @@ f.close()
 for item in contents:
     description = item['description']
     createdAt   = item['createdAt']
-    if 'fromStation'in item:
-        fromStation = ""
-    else:
-        fromStation= ""
-
-    # if 'projectName'in item:
-    #     projectName = "AEP"
-    # else:
-    #     projectName= "AEP"
 
     username = item['updatedByUser']['userDisplayName']
     if 'equipmentOutages' in item:
@@ -205,36 +200,38 @@ for item in contents:
         eroctNatureOfWork = item['customFieldValuesExt']['ERCOT_nature_of_work-T']
         emerRestInHours = item['customFieldValuesExt']['ERCOT_emergency_restoration_in_hours']
         ercotOutageType = item['customFieldValuesExt']['ERCOT_outage_type-T']
-   
+        ERCOT_rasps_notes = item['customFieldValuesExt']['ERCOT_rasps_notes']
+        ERCOT_supporting_notes = item['customFieldValuesExt']['ERCOT_supporting_notes']
+        ERCOT_group_outage_ID = item['customFieldValuesExt']['ERCOT_group_outage_ID']
+        
+
 for equipment in equipmentOutages:
-    if 'status' in equipment:
+
+    if 'ERCOT_outage_ID' in equipment['customFieldValuesExt']:
+        outage_IDs.append(equipment['customFieldValuesExt']['ERCOT_outage_ID'])
+    else:
+        ercot_Name = equipment['assetValuesExt']['ERCOT Name']
+        ercot_Rdfid = equipment['assetValuesExt']['ERCOT RDFID']
+        transmissionType = equipment['assetModelTypeName']       
+        fromStation = equipment['assetValuesExt']['From Station']
         status = equipment['status']
-        if equalignoreCase(status) == equalignoreCase("OPEN"):
-            status = "O"
-        elif equalignoreCase(status) == equalignoreCase("Close"):
-            status = "C"
-        else: 
-            status= ""
-
-    if 'customFieldValuesExt' in equipment:
-            #ERCOT_latest_end 
-        # print(equipment['customFieldValuesExt'])  
-
-        voltage = re.match('[0-9]+',equipment['asset']['Voltage'])    
+        voltage = re.match('[0-9]+',equipment['assetValuesExt']['Voltage'])
+        voltage = voltage.group(0)
+        equipData.append({
+            "operatingCompany": "TAEPTC",
+            "equipmentName": ercot_Name,
+            "equipmentIdentifier": ercot_Rdfid,
+            "transmissionType": transmissionType,
+            "fromStation": fromStation,
+            "outageState": status,
+            "voltage": voltage,
+            "projectName": "",
+            "emergencyRestorationTime": emerRestInHours,
+            "natureOfWork": eroctNatureOfWork,
+        })
   
-    equipData.append({
-        "operatingCompany": "TAEPTC",
-        "equipmentName": equipment['asset']['ERCOT Name'],
-        "equipmentIdentifier": equipment['asset']['ERCOT RDFID'],
-    #   "transmissionType": equipment['asset']['_modelTypeId']
-        "transmissionType": text_get(equipment['asset']['_modelTypeId']),
-        "fromStation": fromStation,
-        "outageState": status,
-        "voltage": voltage.group(),
-        "projectName": "",
-        "emergencyRestorationTime": emerRestInHours,
-        "natureOfWork": text_get(eroctNatureOfWork),
-    })
+    
+    
     if 'status' in equipment:
         status = equipment['status']
     if 'plannedStart' in equipment:
@@ -247,153 +244,64 @@ for equipment in equipmentOutages:
         ercotLatestEnd = equipment['customFieldValuesExt']['ERCOT_latest_end']
 
 
-#UTC CREATED AT
+
 UTC = timezone('UTC')
 utc_dt = datetime.now(UTC)
 date = (utc_dt.isoformat( timespec="seconds"))
-payloadData =  {
-  "Header": {
-    "Verb": "create",
-    "Noun": "OutageSet",
-    "ReplayDetection": {
-      "Nonce": generate_nonce(15),
-      "Created": date
-    },
-    "Revision": 4,
-    "Source": "TAEPTC",
-    "UserID": "API_OutplanOSITCC"
+dated = utc_dt.strftime('%Y-%m-%dT%H:%M:%SZ')
+
+payloadData={
+    "Header": {
+        "Verb": "create",
+        "Noun": "OutageSet",
+        "ReplayDetection": {
+            "Nonce": generate_nonce(15),
+            "Created": '2023-05-17T04:23-6:00'
+        },
+        "Revision": 4,
+        "Source": "TAEPTC",
+        "UserID": "API_OutplanOSITCC"
   },
-  
-"Payload": {
-    "OutageSet": {
-      "Outage": {
-        "OutageInfo": {
-          "outageType":text_get(ercotOutageType),
-          "participant": "TAEPTC",
-          "Requestor": {
-            "name": 2241,
+
+    "Payload": {
+        "OutageUpdate": {
+            "mRID": outage_IDs[0],
             "userFullName": username,
-            "tertiaryContact": "512-555-1234"
-          },
-          "Disclaimer": "Temp Disclaimer",
-          "disclaimerAck": True
-        },
-        "Group": {
-          "name": "GRP1",
-          "GroupTransmissionOutage": (equipData)
-        },
-       "Schedule": {
-          "plannedStart":datetime_format(plannedStart),
-          "plannedEnd": datetime_format(plannedEnd),
-          "earliestStart": earlistStart,
-          "latestEnd": ercotLatestEnd
-        },
-        "OSNotes":{
-            "RequestorNotes":{
-                "Note":{
-                    "createdTime":datetime_format(plannedStart),
-                    "createdBy":"AEPUser",
-                    "company":"TAEPTC",
-                    "comment":description
-                }
-            }
+            "addToGroup": {
+                "groupId": ERCOT_group_outage_ID,
+                "name": "Grp1",
+                "GroupTransmissionOutage":(equipData)
+            },
         }
-      }
     }
-  }
-} 
+}
+
+print(json.dumps(payloadData, sort_keys=True, indent=4))
 
 json_data = {
-    "createdTime":datetime_format(plannedStart),
-    "createdBy":"abc",
-    "company":"abc",
-    "comment":ERCOT_rasps_notes
+    "Note" : {
+        "createdTime":datetime_format(plannedStart),
+        "createdBy":"abc",
+        "company":"abc",
+        "comment":ERCOT_rasps_notes
+    }
 }
 
 json_data2 = {
+    "Note" : {
             "createdTime":datetime_format(plannedStart),
             "createdBy":"abc",
             "company":"abc",
             "comment":ERCOT_supporting_notes
-        }
+    }
+}
 
-if ERCOT_supporting_notes !="":
-    payloadData['Payload']['OutageSet']['Outage']['OSNotes']['ERCOT_supporting_notes'] = json_data2
-
-if ERCOT_rasps_notes !="":
-    payloadData['Payload']['OutageSet']['Outage']['OSNotes']['ERCOT_rasps_notes'] = json_data
-
+print("=================================")
 with client.settings(raw_response=True):
     response = client.service.MarketTransactions(**payloadData)
 
 print("############# START RESPONSE ######")
 data_dict = xmltodict.parse(response.content)
+print(data_dict)
+print("------------------")
 
-
-responseBody = data_dict['SOAP-ENV:Envelope']['SOAP-ENV:Body']
-
-replyRes = responseBody['ns0:ResponseMessage']['ns0:Reply']
-
-if 'ns0:ReplyCode' in replyRes and replyRes['ns0:ReplyCode'] == 'OK' :
-    print("############# TODAY Response JSON ######")
-    outageJson = responseBody['ns0:ResponseMessage']['ns0:Payload']['ns1:OutageSet']['ns1:Outage']
-    outageGroup = outageJson['ns1:Group']['ns1:GroupTransmissionOutage']
-    notes = outageJson['ns1:OSNotes']
-    euidpIDs = []
-    equipmentOutagesRes = {}
-    for equipmentOutage in equipmentOutages:
-        euidpIDs.append(equipmentOutage['id'])
-    
-    for index, itemOutage in enumerate(outageGroup):
-        id = euidpIDs[index]
-        equipmentOutagesRes.update({id:  {
-            'customFieldValuesExt': { "ERCOT_outage_ID": itemOutage['ns1:mRID']}
-        }})
-
-    response = {
-        "customFieldValuesExt": {
-            'ERCOT_group_outage_ID': outageJson['ns1:Group']['ns1:groupId'],
-            'ERCOT_outage_state': text_response_get(outageJson['ns1:OutageInfo']['ns1:state']),
-            'ERCOT_outage_status': text_response_get(outageJson['ns1:OutageInfo']['ns1:status']),
-            'ERCOT_submit_response': "{} Timestamp:-{}".format(replyRes['ns0:ReplyCode'],replyRes['ns0:Timestamp']),
-        },
-    }
-
-    if 'ns1:SupportingNotes' in notes and notes['ns1:SupportingNotes'] is not None:
-        response["customFieldValuesExt"]["ERCOT_supporting_notes"] = notes['ns1:SupportingNotes']
-
-    if 'ns1:RASPSNotes' in notes and notes['ns1:RASPSNotes'] is not None:
-        response["customFieldValuesExt"]["ERCOT_rasps_notes"] = notes['ns1:RASPSNotes']
-
-    if 'ns1:ReviewerNotes' in notes and notes['ns1:ReviewerNotes'] is not None:
-        response["customFieldValuesExt"]["ERCOT_reviewer_notes"] = notes['ns1:ReviewerNotes']
-    
-    print(json.dumps(response, check_circular=False, indent=4))
-    print('####### equipmentOutages result ######')
-
-    print(json.dumps(equipmentOutagesRes, sort_keys=True, indent=4))
-
-    # Write response in result.json file #
-    with open("result.json", "w") as outfile:
-        outfile.write(json.dumps(response, sort_keys=True, indent=4))
-
-    # Write equipmentOutages in equipmentOutages_result.json file 
-    with open("equipmentOutages_result.json", "w") as outfile:
-        outfile.write(json.dumps(equipmentOutagesRes, sort_keys=True, indent=2))
-
-#Validation Error print
-elif 'ns0:ReplyCode' in replyRes and (replyRes['ns0:ReplyCode'] == 'ERROR'):
-    errorValidations = responseBody['ns0:ResponseMessage']['ns0:Payload']['ns1:OutageSet']['ns1:Outage']
-
-    if 'ns0:Error' in replyRes:
-        error = '\n'.join(replyRes['ns0:Error'])
-
-    if  'ns1:Error' in errorValidations and isinstance(errorValidations['ns1:Error'], list):
-        for errorNs in errorValidations['ns1:Error']:
-            error += '\n' + errorNs['ns1:text']
-    elif 'ns1:Error' in errorValidations:
-        error += '\n' + errorValidations['ns1:Error']['ns1:text']
-    
-print('###### Error #####')
-final_error = 'final_error= '+ error
-print(final_error)

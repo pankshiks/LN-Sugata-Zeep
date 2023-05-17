@@ -1,0 +1,281 @@
+[
+   {
+      "id":"64608db40cc2fc1248e15e01",
+      "createdAt":"2023-05-14T07:28:52Z",
+      "createdByUser":{
+         "userID":"642afe1bcf78a44c681df427",
+         "userDisplayName":"Shreya"
+      },
+      "updatedAt":"2023-05-14T07:48:26Z",
+      "updatedByUser":{
+         "userID":"642afe1bcf78a44c681df427",
+         "userDisplayName":"Shreya"
+      },
+      "archived":false,
+      "customFieldValues":{
+         "637ea419173b76598129cd44":1,
+         "637ea6d2173b76598129cd9a":"rasps",
+         "637ea5d6173b76598129cd79":"supp",
+         "637ea513173b76598129cd61":8,
+         "63ab79a86c02026ac06537e8":0,
+         "6458fc36c3442f2ed718198e":"444-555-6678",
+         "637ea70d173b76598129cda4":"OK Timestamp:-2023-05-14T02:29:07.984-05:00",
+         "63a62dc06c02026ac064ac27":"Entered Not Yet Submitted",
+         "63ab65246c02026ac0653585":"TAEPTC.OTG.101290",
+         "643813777c79d0262f8c1415":"Received at ERCOT",
+         "63c9aa9343faa570c6a6242e":2
+      },
+      "customTableValues":{
+         
+      },
+      "attachmentIDs":[
+         
+      ],
+      "commentIDs":[
+         
+      ],
+      "links":[
+         
+      ],
+      "linkAdds":[
+         
+      ],
+      "printViewAttachmentIDs":[
+         
+      ],
+      "statusID":"63becc06ab8f1b1af6885f87",
+      "transitionHistory":[
+         {
+            "archived":false,
+            "stateID":0,
+            "statusID":"63becc06ab8f1b1af6885f6e",
+            "transitionedAt":"2023-05-14T07:28:52Z"
+         },
+         {
+            "archived":false,
+            "stateID":0,
+            "statusID":"6439d76e7c79d0262f8c4326",
+            "transitionedAt":"2023-05-14T07:29:01Z"
+         },
+         {
+            "archived":false,
+            "stateID":0,
+            "statusID":"63becc06ab8f1b1af6885f79",
+            "transitionedAt":"2023-05-14T07:29:20Z"
+         },
+         {
+            "createdAt":"2023-05-14T07:48:26Z",
+            "updatedAt":"2023-05-14T07:48:26Z",
+            "archived":false,
+            "stateID":0,
+            "statusID":"63becc06ab8f1b1af6885f87",
+            "transitionedAt":"2023-05-14T07:48:26Z"
+         }
+      ],
+      "customId":"ERCOT-PT.2023.May.00325",
+      "description":"add equipment",
+      "requestedByUser":{
+         "userID":"642afe1bcf78a44c681df427",
+         "userDisplayName":"Shreya"
+      },
+      "requestedEnd":"2024-01-08T06:30:00Z",
+      "requestedStart":"2024-01-07T06:30:00Z",
+      "requestTypeID":"63b7251b6c02026ac06681d7",
+      "aorIDs":[
+         "58ff6f428e5e6b28f23a45ec"
+      ],
+      "switchOrderIDs":[
+         
+      ],
+      "permitIDs":[
+         
+      ],
+      "outageRequestIDs":[
+         
+      ],
+      "outageType":"CONTINUOUS",
+      "equipmentOutages":[
+         {
+            "id":"64608d550cc2fc1248e15de4",
+            "createdAt":"2023-05-14T07:28:52Z",
+            "createdByUser":{
+               "userID":"642afe1bcf78a44c681df427",
+               "userDisplayName":"Shreya"
+            },
+            "updatedAt":"2023-05-14T07:29:16Z",
+            "updatedByUser":{
+               "userID":"631a009988753c7d8ea0543a",
+               "userDisplayName":"RC_Interfaces"
+            },
+            "archived":false,
+            "customFieldValues":{
+               "6384f275173b7659812a6ed4":"2024-01-07T06:30:00Z",
+               "6384f28e173b7659812a6ed7":"2024-01-08T06:30:00Z",
+               "63ab65ce6c02026ac065359a":"TAEPTC.OTG.PL.Transmission.AEP00075266"
+            },
+            "customTableValues":{
+               
+            },
+            "requestID":"64608db40cc2fc1248e15e01",
+            "plannedStart":"2024-01-07T06:30:00Z",
+            "plannedEnd":"2024-01-08T06:30:00Z",
+            "plannedDuration":86400000,
+            "status":"OUT_OF_SERVICE",
+            "assetExtID":"5f23d8ad-aa52-4f96-bef1-fcb51be9e0bf",
+            "assetName":"6035",
+            "assetModelTypeID":"type000000136",
+            "assetModelTypeName":"Breaker",
+            "assetValues":{
+               "63934fc06012b251913a1a7e":"6035",
+               "634d6d1a5eb9116cb479f579":"Lon Hill PS",
+               "6393528a6012b251913a1ace":true,
+               "63934ec16012b251913a1a61":"138 kV",
+               "644562d07c79d0262f8d7c3e":"Lon Hill PS",
+               "639350496012b251913a1a90":"_{7EEF8BDC-BA64-4331-B4F9-A16816B72F9F}"
+            },
+            "customTableValuesExt":{
+               
+            },
+            "customFieldValuesExt":{
+               "ERCOT_earliest_start":"2024-10-11T18:00:00Z",
+               "ERCOT_latest_end":"2024-10-12T18:00:00Z",
+               "ERCOT_outage_ID":"TAEPTC.OTG.PL.Transmission.AEP00075266"
+            },
+            "assetValuesExt":{
+               "Station":"Lon Hill PS",
+               "ERCOT RDFID":"_{7EEF8BDC-BA64-4331-B4F9-A16816B72F9F}",
+               "ERCOT Name":"6035",
+               "Voltage":"138 kV",
+               "ERCOT Reportable":true,
+               "From Station":"Lon Hill PS"
+            }
+         },
+         {
+            "id":"64608d550cc2fc1248e15de3",
+            "createdAt":"2023-05-14T07:28:52Z",
+            "createdByUser":{
+               "userID":"642afe1bcf78a44c681df427",
+               "userDisplayName":"Shreya"
+            },
+            "updatedAt":"2023-05-14T07:36:50Z",
+            "updatedByUser":{
+               "userID":"642afe1bcf78a44c681df427",
+               "userDisplayName":"Shreya"
+            },
+            "archived":false,
+            "customFieldValues":{
+               "6384f275173b7659812a6ed4":"2024-01-07T06:30:00Z",
+               "6384f28e173b7659812a6ed7":"2024-01-08T06:30:00Z",
+               "63ab65ce6c02026ac065359a":"TAEPTC.OTG.PL.Transmission.AEP00075267"
+            },
+            "customTableValues":{
+               
+            },
+            "requestID":"64608db40cc2fc1248e15e01",
+            "plannedStart":"2024-10-11T18:00:00Z",
+            "plannedEnd":"2024-10-12T18:00:00Z",
+            "plannedDuration":86400000,
+            "status":"OUT_OF_SERVICE",
+            "assetExtID":"6553214c-bfce-4eac-b4fe-c1989ca11368",
+            "assetName":"6015",
+            "assetModelTypeID":"type000000136",
+            "assetModelTypeName":"Breaker",
+            "assetValues":{
+               "63934fc06012b251913a1a7e":"6015",
+               "634d6d1a5eb9116cb479f579":"Lon Hill PS",
+               "6393528a6012b251913a1ace":true,
+               "63934ec16012b251913a1a61":"138 kV",
+               "644562d07c79d0262f8d7c3e":"Lon Hill PS",
+               "639350496012b251913a1a90":"_{E260591A-EB0A-402D-ACF1-6D3BD0B3A51F}"
+            },
+            "customTableValuesExt":{
+               
+            },
+            "customFieldValuesExt":{
+               "ERCOT_earliest_start":"2024-10-11T18:00:00Z",
+               "ERCOT_latest_end":"2024-10-12T18:00:00Z",
+               "ERCOT_outage_ID":"TAEPTC.OTG.PL.Transmission.AEP00075267"
+            },
+            "assetValuesExt":{
+               "Station":"Lon Hill PS",
+               "ERCOT RDFID":"_{E260591A-EB0A-402D-ACF1-6D3BD0B3A51F}",
+               "ERCOT Name":"6015",
+               "Voltage":"138 kV",
+               "ERCOT Reportable":true,
+               "From Station":"Lon Hill PS"
+            }
+         },
+         {
+            "id":"64608e420cc2fc1248e15e27",
+            "createdAt":"2023-05-14T07:31:12Z",
+            "createdByUser":{
+               "userID":"642afe1bcf78a44c681df427",
+               "userDisplayName":"Shreya"
+            },
+            "updatedAt":"2023-05-14T07:36:50Z",
+            "updatedByUser":{
+               "userID":"642afe1bcf78a44c681df427",
+               "userDisplayName":"Shreya"
+            },
+            "archived":false,
+            "customFieldValues":{
+               "6384f275173b7659812a6ed4":"2024-01-07T06:30:00Z",
+               "6384f28e173b7659812a6ed7":"2024-01-08T06:30:00Z"
+            },
+            "customTableValues":{
+               
+            },
+            "requestID":"64608db40cc2fc1248e15e01",
+            "plannedStart":"2024-10-11T18:00:00Z",
+            "plannedEnd":"2024-10-12T18:00:00Z",
+            "plannedDuration":86400000,
+            "status":"OUT_OF_SERVICE",
+            "assetExtID":"1bde05b8-b265-466e-9b80-97c57e2cfc29",
+            "assetName":"6016",
+            "assetModelTypeID":"type000000138",
+            "assetModelTypeName":"Disconnect",
+            "assetValues":{
+               "63934fc06012b251913a1a7e":"6016",
+               "634d6d1a5eb9116cb479f579":"Lon Hill PS",
+               "6393528a6012b251913a1ace":true,
+               "63934ec16012b251913a1a61":"138 kV",
+               "644562d07c79d0262f8d7c3e":"Lon Hill PS",
+               "639350496012b251913a1a90":"_{79955A41-E16E-4B68-BDA9-6DF27FA8E006}"
+            },
+            "customTableValuesExt":{
+               
+            },
+            "customFieldValuesExt":{
+               "ERCOT_earliest_start":"2024-01-07T06:30:00Z",
+               "ERCOT_latest_end":"2024-01-08T06:30:00Z"
+            },
+            "assetValuesExt":{
+               "Station":"Lon Hill PS",
+               "ERCOT RDFID":"_{79955A41-E16E-4B68-BDA9-6DF27FA8E006}",
+               "ERCOT Name":"6016",
+               "Voltage":"138 kV",
+               "ERCOT Reportable":true,
+               "From Station":"Lon Hill PS"
+            }
+         }
+      ],
+      "displayLabel":"ERCOT-PT.2023.May.00325",
+      "commentCount":0,
+      "customTableValuesExt":{
+         
+      },
+      "customFieldValuesExt":{
+         "ERCOT_emergency_restoration_in_hours":1,
+         "ERCOT_rasps_notes":"rasps",
+         "ERCOT_supporting_notes":"supp",
+         "ERCOT_nature_of_work-T":"Repair/Replace Damaged Equipment",
+         "ERCOT_outage_type-T":"Planned",
+         "ERCOT_primary_contact":"444-555-6678",
+         "ERCOT_submit_response":"OK Timestamp:-2023-05-14T02:29:07.984-05:00",
+         "ERCOT_outage_state":"Entered Not Yet Submitted",
+         "ERCOT_group_outage_ID":"TAEPTC.OTG.101290",
+         "ERCOT_outage_status":"Received at ERCOT",
+         "ERCOT_reason_for_change":"Add Equipment"
+      }
+   }
+]
